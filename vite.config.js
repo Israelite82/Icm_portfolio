@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  // ADD THIS LINE:
+  base: '/',
+  
   plugins: [
     react({
       babel: {
@@ -9,4 +12,12 @@ export default defineConfig({
       },
     }),
   ],
+  
+  // ALSO ADD THIS (optional but recommended):
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: './index.html' 
+    }
+  }
 })
