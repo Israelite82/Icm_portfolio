@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -61,19 +62,19 @@ export default function Home() {
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex gap-10 text-sm text-gray-300 ml-auto mr-20">
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <a href="/about">About</a>
+            <Link to="/about">About</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <a href="/research">Research</a>
+            <Link to="/research">Research</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <a href="/blog">Blog</a>
+            <Link to="/blog">Blog</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <a href="/books">Books</a>
+            <Link to="/books">Books</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <a href="/teaching">Teaching</a>
+            <Link to="/teaching">Teaching</Link>
           </li>
         </ul>
 
@@ -102,41 +103,41 @@ export default function Home() {
   </button>
 
   <div className="flex flex-col p-6 pt-20 gap-6">
-    <a
-      href="/about"
+    <Link
+      to="/about"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       About
-    </a>
-    <a
-      href="/research"
+    </Link>
+    <Link
+      to="/research"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Research
-    </a>
-    <a
-      href="/blog"
+    </Link>
+    <Link
+      to="/blog"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Blog
-    </a>
-    <a
-      href="/books"
+    </Link>
+    <Link
+      to="/books"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Books
-    </a>
-    <a
-      href="/teaching"
+    </Link>
+    <Link
+      to="/teaching"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Teaching
-    </a>
+    </Link>
   </div>
 </div>
       </nav>

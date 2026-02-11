@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex gap-10 text-sm text-gray-300 ml-auto mr-20">
           <li className='hover:text-[#F2E8D5] cursor-pointer'>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
             <Link to="/about">About</Link>
@@ -67,48 +67,48 @@ export default function Navbar() {
   </button>
 
   <div className="flex flex-col p-6 pt-20 gap-6">
-    <a
-      href="/"
+    <Link
+      to="/"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Home
-    </a>
-    <a
-      href="/about"
+    </Link>
+    <Link
+      to="/about"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       About
-    </a>
-    <a
-      href="/research"
+    </Link>
+    <Link
+      to="/research"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Research
-    </a>
-    <a
-      href="/blog"
+    </Link>
+    <Link
+      to="/blog"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Blog
-    </a>
-    <a
-      href="/books"
+    </Link>
+    <Link
+      to="/books"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Books
-    </a>
-    <a
-      href="/teaching"
+    </Link>
+    <Link
+      to="/teaching"
       className="text-gray-300 hover:text-[#F2E8D5] text-lg"
       onClick={() => setMenuOpen(false)}
     >
       Teaching
-    </a>
+    </Link>
   </div>
 </div>
       </nav>
