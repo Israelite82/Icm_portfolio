@@ -32,10 +32,10 @@ export default function Footer() {
               <Link to="/">Home</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
-              <Link to="/about">Minister</Link>
+              <Link to="/teachings">Teachings</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
-              <Link to="/research">Scholar</Link>
+              <Link to="/research">Research</Link>
             </li>
           </ul>
         </div>
@@ -74,6 +74,7 @@ export default function Footer() {
         <p className="text-start text-gray-400 text-sm">
           © 2025 Dr. Osaren Emokpae All rights reserved.
         </p>
+        <a href="" className='text-xs text-gray-500 ml-4'>CONTROL</a>
       </div>
     </footer>
   );
