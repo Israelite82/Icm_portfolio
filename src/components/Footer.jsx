@@ -74,7 +74,7 @@ export default function Footer() {
         <p className="text-start text-gray-400 text-sm">
           © 2025 Dr. Osaren Emokpae All rights reserved.
         </p>
-        <a href="" className='text-xs text-gray-500 ml-4'>CONTROL</a>
+        <a href="https://it-portfolio-admin.onrender.com" className='text-xs text-gray-500 ml-4'>CONTROL</a>
       </div>
     </footer>
   );
