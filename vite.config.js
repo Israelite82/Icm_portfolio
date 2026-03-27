@@ -16,6 +16,5 @@ export default defineConfig({
       input: './index.html'
     }
   },
-  // This ensures public folder files are copied
   publicDir: 'public'
 })
