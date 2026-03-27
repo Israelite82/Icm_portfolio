@@ -5,8 +5,10 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Research from './pages/Research.jsx';
 import Blog from './pages/Blog.jsx';
+import BlogPost from './pages/Blogpost';
 import Books from './pages/Books.jsx';
 import Teaching from './pages/Teaching.jsx';
+import TeachingDetail from './pages/TeachingDetail';
 import './App.css';
 
 function AppContent() {
@@ -22,8 +24,10 @@ function AppContent() {
         <Route path="/about" element={<About />} />
         <Route path="/research" element={<Research />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/books" element={<Books />} />
         <Route path="/teaching" element={<Teaching />} />
+        <Route path="/teaching/:id" element={<TeachingDetail />} />
       </Routes>
       
       <Footer />

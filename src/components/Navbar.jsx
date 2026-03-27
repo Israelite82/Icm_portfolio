@@ -8,7 +8,7 @@ export default function Navbar() {
       {/* NAVBAR */}
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 md:py-6 relative">
         {/* Logo */}
-        <img src="/heroImg.png" alt="Hero" className="w-32 h-12 md:w-45 md:h-16" />
+        <img src="/heroImg.png" alt="Hero" className="w-32 h-12 md:w-45 md:h-13" />
 
         {/* Hamburger Menu Button - Mobile Only */}
         <button
