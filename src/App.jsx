@@ -5,7 +5,7 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Research from './pages/Research.jsx';
 import Blog from './pages/Blog.jsx';
-import BlogPost from './pages/Blogpost';
+import BlogPost from './pages/BlogPost';
 import Books from './pages/Books.jsx';
 import Teaching from './pages/Teaching.jsx';
 import TeachingDetail from './pages/TeachingDetail';
