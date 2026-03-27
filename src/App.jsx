@@ -15,7 +15,7 @@ function AppContent() {
   const location = useLocation();
   
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-[#071324] to-[#071324] text-white">
+    <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-[#071324] to-[#071324] text-white">
       {/* Only show Navbar on OTHER pages, NOT home */}
       {location.pathname !== '/' && <Navbar />}
       

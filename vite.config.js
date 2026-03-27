@@ -5,6 +5,10 @@ export default defineConfig({
   // ADD THIS LINE:
   base: '/',
   
+  server: {
+    historyApiFallback: true
+  },
+  
   plugins: [
     react({
       babel: {
