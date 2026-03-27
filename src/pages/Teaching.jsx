@@ -121,7 +121,7 @@ export default function Teaching() {
                         e.stopPropagation();
                         handleReadMore(teaching.id);
                       }}
-                      className="text-[#6B0F1A] font-semibold hover:underline text-sm md:text-base inline-flex items-center gap-1"
+                     className="text-[#071b34] font-semibold hover:underline text-sm md:text-base outline-none border-none bg-transparent cursor-pointer"
                     >
                       Read more →
                     </button>
