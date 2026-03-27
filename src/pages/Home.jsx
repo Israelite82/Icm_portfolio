@@ -266,7 +266,7 @@ export default function Home() {
         <img
           src={slide.image}
           alt="Biography"
-          className="w-full h-80 md:h-full object-cover object-top"  {/* Increased from h-65 to h-80 */}
+          className="w-full h-80 md:h-full object-cover object-top"  
         />
         <div className="p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
@@ -289,7 +289,7 @@ export default function Home() {
         <img
           src={slide.image}
           alt="Slide"
-          className="w-full h-full object-contain md:object-cover"  {/* object-contain shows full image */}
+          className="w-full h-full object-contain md:object-cover"  
         />
       </div>
     )}
