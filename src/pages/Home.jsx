@@ -289,10 +289,10 @@ export default function Home() {
         <img
           src={slide.image}
           alt="Slide"
-          className="w-full h-96"
+          className="w-full h-96 object-cover"
         />
         {/* Empty div with same height as text section on mobile */}
-        <div className="h-[230px] md:hidden"></div>
+        <div className="h-[240px] md:hidden"></div>
       </div>
     )}
   </div>
