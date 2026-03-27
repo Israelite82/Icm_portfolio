@@ -263,10 +263,10 @@ export default function Home() {
     {slide.hasText ? (
       // Slides WITH text (Slide 1 and 2)
       <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
-     <img
+    <img
   src={slide.image}
   alt="Biography"
-  className={`w-full h-65 md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
+  className={`w-full ${index === 1 ? 'h-80' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
 />
        <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
@@ -289,7 +289,7 @@ export default function Home() {
         <img
           src={slide.image}
           alt="Slide"
-          className="w-full h-96 "
+          className="w-full h-96 object-cover"
         />
         {/* Empty div with same height as text section on mobile */}
         <div className="h-[200px] md:hidden"></div>
