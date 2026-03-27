@@ -23,22 +23,22 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex gap-10 text-sm text-gray-300 ml-auto mr-20">
           <li className='hover:text-[#F2E8D5] cursor-pointer'>
-            <Link to="/">Home</Link>
+            <Link to="/" className="text-gray-300 hover:text-[-[#473be9]">Home</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/about">About</Link>
+            <Link to="/about" className="text-gray-300 hover:text-[-[#473be9]">About</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/research">Research</Link>
+            <Link to="/research" className="text-gray-300 hover:text-[-[#473be9]">Research</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/blog">Blog</Link>
+            <Link to="/blog" className="text-gray-300 hover:text-[-[#473be9]">Blog</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/books">Books</Link>
+            <Link to="/books"className="text-gray-300 hover:text-[-[#473be9]">Books</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/teaching">Teaching</Link>
+            <Link to="/teaching" className="text-gray-300 hover:text-[#473be9]">Teaching</Link>
           </li>
         </ul>
 

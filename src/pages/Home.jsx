@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const API_URL = "https://api.osarenemokpae.com/api";
 
 export default function Home() {
@@ -31,12 +30,13 @@ export default function Home() {
       .get(`${API_URL}/homepage`)
       .then((res) => {
         const homepageData = res.data.data || res.data;
-        console.log("Sections from API:", homepageData.sections);
+        console.log("Homepage data:", homepageData);
 
-        // Hero section data
+        // --- CRITICAL CHANGE: Only fetch data for the SECOND slide ---
         if (homepageData.hero) {
+          // This data is ONLY for the second slide
           setForm({
-            headline: homepageData.hero.headline || "",
+            headline: homepageData.hero.headline || "Welcome",
             subtext: homepageData.hero.subtext || "",
           });
 
@@ -46,20 +46,16 @@ export default function Home() {
         }
 
         // Visibility from sections object
-        if (
-          homepageData.sections &&
-          typeof homepageData.sections === "object"
-        ) {
-          // Get all section names from the object
+        if (homepageData.sections && typeof homepageData.sections === "object") {
           const sectionNames = Object.values(homepageData.sections).map(
-            (section) => section.name,
+            (section) => section.name
           );
 
           setVisibility({
-            Hero: sectionNames.includes("Hero"), // If "Hero" is in sections → visible
-            Teaching: sectionNames.includes("Featured teaching"), // If "Featured teaching" is in sections → visible
-            Blog: sectionNames.includes("Featured blog"), // If "Featured blog" is in sections → visible
-            Books: sectionNames.includes("Featured book"), // If "Featured book" is in sections → visible
+            Hero: sectionNames.includes("Hero"),
+            Teaching: sectionNames.includes("Featured teaching"),
+            Blog: sectionNames.includes("Featured blog"),
+            Books: sectionNames.includes("Featured book"),
           });
         }
       })
@@ -84,16 +80,22 @@ export default function Home() {
       .catch((err) => console.error("Error fetching blog posts:", err));
   }, []);
 
+  // --- CRITICAL CHANGE: Slides are now separate: First Slide (Hardcoded), Second Slide (Dynamic) ---
   const slides = [
     {
+      // SLIDE 1: PERFECTLY HARDCODED - Will NEVER change
       image: "/bioImg.png",
       title: "Dr. Osaren Emokpae",
-      subtitle: "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
+      subtitle:
+        "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
       hasText: true,
     },
     {
-      image: heroImage || "/slide2.png",
-      hasText: false,
+      // SLIDE 2: ALL CONTENT COMES FROM ADMIN (API)
+      image: heroImage || "/slide2.png", // Admin image OR default
+      title: form.headline, // Admin headline
+      subtitle: form.subtext, // Admin subtext
+      hasText: true,
     },
     {
       image: "/slide3.png",
@@ -136,13 +138,19 @@ export default function Home() {
           className="md:hidden flex flex-col gap-1.5 z-50 ml-16"
         >
           <span
-            className={`w-6 h-0.5 bg-white transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+            className={`w-6 h-0.5 bg-white transition-transform ${
+              menuOpen ? "rotate-45 translate-y-2" : ""
+            }`}
           ></span>
           <span
-            className={`w-6 h-0.5 bg-white transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+            className={`w-6 h-0.5 bg-white transition-opacity ${
+              menuOpen ? "opacity-0" : ""
+            }`}
           ></span>
           <span
-            className={`w-6 h-0.5 bg-white transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            className={`w-6 h-0.5 bg-white transition-transform ${
+              menuOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
           ></span>
         </button>
 
@@ -260,14 +268,14 @@ export default function Home() {
                         alt="Biography"
                         className="w-full h-65 md:h-full object-cover"
                       />
+                      {/* --- CRITICAL CHANGE: Slide 1 and Slide 2 now use their own data from the 'slides' array --- */}
                       {visibility.Hero && (
                         <div className="p-6 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white">
                           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
-                            {form.headline || "Dr. Osaren Emokpae"}
+                            {slide.title}
                           </h1>
                           <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
-                            {form.subtext ||
-                              "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur"}
+                            {slide.subtitle}
                           </p>
                           <button
                             onClick={() => navigate("/about")}

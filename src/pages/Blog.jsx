@@ -79,15 +79,15 @@ export default function Blog() {
                   <p className="text-gray-700 leading-relaxed text-sm md:text-base mb-4 line-clamp-3">
                     {blog.excerpt || blog.content?.substring(0, 120)}...
                   </p>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleReadMore(blog.id);
-                    }}
-                    className="text-[#071b34] font-semibold hover:underline text-sm md:text-base"
-                  >
-                    Read more →
-                  </button>
+                 <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleReadMore(blog.id);
+            }}
+            className="text-[#071b34] font-semibold hover:underline text-sm md:text-base outline-none border-none bg-transparent cursor-pointer"
+          >
+            Read more →
+          </button>
                 </div>
               </div>
             ))}
