@@ -91,11 +91,10 @@ export default function Home() {
       hasText: true,
     },
     {
-      // SLIDE 2: ALL CONTENT COMES FROM ADMIN (API)
-      image: heroImage || "/slide2.png", // Admin image OR default
-      title: form.headline, // Admin headline
-      subtitle: form.subtext, // Admin subtext
-      hasText: true,
+       image: heroImage || "/slide2.png",
+    title: form.headline || "Welcome",
+    subtitle: form.subtext || "",
+    hasText: true,
     },
     {
       image: "/slide3.png",
@@ -259,44 +258,43 @@ export default function Home() {
               className="flex h-full transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-              {slides.map((slide, index) => (
-                <div key={index} className="min-w-full h-full">
-                  {slide.hasText ? (
-                    <div className="flex flex-col md:grid md:grid-cols-2 bg-[#0b1227] shadow-lg h-full rounded-2xl overflow-hidden">
-                      <img
-                        src={slide.image}
-                        alt="Biography"
-                        className="w-full h-65 md:h-full object-cover"
-                      />
-                      {/* --- CRITICAL CHANGE: Slide 1 and Slide 2 now use their own data from the 'slides' array --- */}
-                      {visibility.Hero && (
-                        <div className="p-6 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white">
-                          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
-                            {slide.title}
-                          </h1>
-                          <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
-                            {slide.subtitle}
-                          </p>
-                          <button
-                            onClick={() => navigate("/about")}
-                            className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
-                          >
-                            Read Full Bio
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="bg-[#0b1227] shadow-lg h-full rounded-2xl overflow-hidden">
-                      <img
-                        src={slide.image}
-                        alt="Slide"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
+             {slides.map((slide, index) => (
+  <div key={index} className="min-w-full h-full">
+    {slide.hasText ? (
+      // Slides WITH text (Slide 1 and 2)
+      <div className="flex flex-col md:grid md:grid-cols-2 bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full">
+        <img
+          src={slide.image}
+          alt="Biography"
+          className="w-full h-80 md:h-full object-cover object-top"  {/* Increased from h-65 to h-80 */}
+        />
+        <div className="p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
+            {slide.title}
+          </h1>
+          <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
+            {slide.subtitle}
+          </p>
+          <button
+            onClick={() => navigate("/about")}
+            className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
+          >
+            Read Full Bio
+          </button>
+        </div>
+      </div>
+    ) : (
+      // Slides WITHOUT text (Slide 3 and 4) - FULL WIDTH, no cropping
+      <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full">
+        <img
+          src={slide.image}
+          alt="Slide"
+          className="w-full h-full object-contain md:object-cover"  {/* object-contain shows full image */}
+        />
+      </div>
+    )}
+  </div>
+))}
             </div>
           </div>
 
