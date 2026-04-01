@@ -32,7 +32,7 @@ export default function Footer() {
               <Link to="/">Home</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
-              <Link to="/teachings">Teachings</Link>
+              <Link to="/teaching">Teachings</Link>
             </li>
             <li className="hover:text-white cursor-pointer">
               <Link to="/research">Research</Link>

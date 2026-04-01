@@ -63,9 +63,12 @@ export default function TeachingDetail() {
       <section className="w-full bg-gradient-to-b from-[#071b34] to-[#06152b]">
         <div className="max-w-7xl mx-auto min-h-[300px] md:h-[400px] px-4 md:px-6 py-12 md:py-0 relative overflow-hidden">
           <div className="md:mt-20 max-w-3xl relative z-10">
-            <button onClick={handleBack} className="inline-block mb-4 text-gray-300 hover:text-white transition">
-              ← Back to Teachings
-            </button>
+           <button 
+  onClick={handleBack} 
+  className="inline-block mb-4 text-gray-300 hover:text-white transition bg-transparent border-none outline-none cursor-pointer"
+>
+  ← Back to Teachings
+</button>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
               {teaching.teaching_title}
             </h1>
