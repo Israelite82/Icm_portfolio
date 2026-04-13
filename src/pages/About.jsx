@@ -8,43 +8,49 @@ export default function About() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchAbout = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/about`);
-      const data = response.data.data || response.data;
-      
-      // ADD THESE TWO LINES RIGHT HERE:
-      console.log("Apostle object:", data.brand_story?.apostle);
-      console.log("Track record object:", data.missions?.track_record);
-      
-      console.log("Full data:", data);
-      console.log("Brand story:", data.brand_story);
-      console.log("Missions:", data.missions);
-      
-      const mappedData = {
-        hero_headline: data.hero_section?.headline || "",
-        hero_subtext: data.hero_section?.subtext || "",
-        hero_background_image: data.hero_section?.background_image_path || null,
-        brand_story: data.brand_story?.academic_biography || "",
-        academic_biography: data.brand_story?.academic_biography || "",
-        apostle_content: data.brand_story?.apostle?.content || data.brand_story?.apostle || "",
-        apostle_image: data.brand_story?.apostle?.image_path || null,
-        track_record_content: data.missions?.track_record?.content || data.missions?.track_record || ""
-      };
-      
-      console.log("Mapped apostle_content:", mappedData.apostle_content);
-      console.log("Mapped track_record_content:", mappedData.track_record_content);
-      
-      setAboutData(mappedData);
-      
-    } catch (error) {
-      console.error("Error fetching about data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchAbout();
-}, []);
+    const fetchAbout = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/about`);
+        const data = response.data.data || response.data;
+        
+        const mappedData = {
+          // Hero section
+          hero_headline: data.hero_section?.headline || "",
+          hero_subtext: data.hero_section?.subtext || "",
+          hero_background_image: data.hero_section?.background_image_path 
+            ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}` 
+            : null,
+          hero_button_text: data.hero_section?.button?.text || "",
+          hero_button_link: data.hero_section?.button?.link || "",
+          
+          // Brand story
+          brand_story: data.brand_story?.academic_biography || "",
+          academic_biography: data.brand_story?.academic_biography || "",
+          
+          // Apostle section
+          apostle_name: data.brand_story?.apostle?.name || "",
+          apostle_content: data.brand_story?.academic_biography || "",
+          apostle_image: data.brand_story?.apostle?.image_path 
+            ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image_path}`
+            : null,
+          
+          // Missions
+          mission_statement_1: data.missions?.mission_statement_1 || "",
+          mission_statement_2: data.missions?.mission_statement_2 || "",
+          track_record_title: data.missions?.track_record?.title || "",
+          track_record_content: data.missions?.track_record?.description || "",
+        };
+        
+        setAboutData(mappedData);
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAbout();
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen w-full bg-white flex items-center justify-center">
@@ -205,7 +211,7 @@ export default function About() {
               {/* Left: Text Content */}
               <div>
                 <h2 className="text-2xl md:text-3xl text-gray-800 font-bold mb-10">
-                  Apostle. Osaren Emokpae
+                  {aboutData.apostle_name || "Apostle. Osaren Emokpae"}
                 </h2>
                 <div className="space-y-6 text-gray-800 text-md md:text-base leading-relaxed">
                   {aboutData.apostle_content ? (
@@ -291,133 +297,51 @@ export default function About() {
           </h2>
           <div className="border-b-4 border-red-700 w-16 mt-4"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-start">
+            {/* First Box - Mission Statement 1 */}
             <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-10">
-              <p className="text-md text-gray-800 leading-relaxed">
-                A National Leader/General
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Overseer Emeritus of Foursquare
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Gospel Church Trinidad & Tobago
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                and Guyana, Executive Counsellor
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Emeritus of Foursquare Nigeria, Dr.
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Emokpae now serves as the
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                President and Presiding Apostle of
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Macedonia Call
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Global Assembly—a ministry with a
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                powerful global vision.
-              </p>
+              {aboutData.mission_statement_1 ? (
+                <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: aboutData.mission_statement_1 }} />
+              ) : (
+                <>
+                  <p className="text-md text-gray-800 leading-relaxed">
+                    A National Leader/General Overseer Emeritus of Foursquare
+                    Gospel Church Trinidad & Tobago and Guyana, Executive Counsellor
+                    Emeritus of Foursquare Nigeria, Dr. Emokpae now serves as the
+                    President and Presiding Apostle of Macedonia Call
+                    Global Assembly—a ministry with a powerful global vision.
+                  </p>
+                </>
+              )}
             </div>
 
-            {/* Second Box */}
+            {/* Second Box - Mission Statement 2 */}
             <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
-              <p className="text-md text-gray-800 leading-relaxed">
-                The vision for Macedonia Call
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Global Assembly was birthed in his
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                heart in 2008 while in Brixton,
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                United Kingdom, within the Foursquare
-              </p>
-
-              <p className="text-md text-gray-800 leading-relaxed">
-                Emokpae now serves as the
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                movement, and was later
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                ncorporated at The Summit in
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Global Assembly—a ministry with a
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Columbia, USA. What began as a
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                divine revelation has since grown
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">into an</p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                independent global ministry
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                committed to accelerating the
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                discipling of nations in preparation
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                For the return of our Savior.
-              </p>
+              {aboutData.mission_statement_2 ? (
+                <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: aboutData.mission_statement_2 }} />
+              ) : (
+                <>
+                  <p className="text-md text-gray-800 leading-relaxed">
+                    The vision for Macedonia Call Global Assembly was birthed in his
+                    heart in 2008 while in Brixton, United Kingdom, within the Foursquare
+                    movement, and was later incorporated at The Summit in
+                    Columbia, USA. What began as a divine revelation has since grown
+                    into an independent global ministry committed to accelerating the
+                    discipling of nations in preparation for the return of our Savior.
+                  </p>
+                </>
+              )}
             </div>
-            {/* Third Box */}
+
+            {/* Third Box - Additional content */}
             <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
               <p className="text-md text-gray-800 leading-relaxed">
-                Under his pastoral leadership, he
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                and his team planted thirteen
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                churches within the Foursquare
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                movement in Nigeria, three in
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                United Kingdom, one in Dominican
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Republic, one in Guyana and one in
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                the USA . Among the foursquare
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                churches he planted in
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Nigeria is the Foursquare Grand
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                Assembly, a remarkable
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                congregation made up of three
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                dynamic expressions, the Youth
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">Church</p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                committed to accelerating the
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                the Church for Street Urchins, and
-              </p>
-              <p className="text-md text-gray-800 leading-relaxed">
-                the Main Church.
+                Under his pastoral leadership, he and his team planted thirteen
+                churches within the Foursquare movement in Nigeria, three in
+                United Kingdom, one in Dominican Republic, one in Guyana and one in
+                the USA. Among the Foursquare churches he planted in
+                Nigeria is the Foursquare Grand Assembly, a remarkable
+                congregation made up of three dynamic expressions: the Youth
+                Church, the Church for Street Urchins, and the Main Church.
               </p>
             </div>
           </div>
@@ -428,7 +352,7 @@ export default function About() {
       <section className="w-full py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl text-gray-900 font-bold">
-            A Track Record of Excellence in the Market
+            {aboutData.track_record_title || "A Track Record of Excellence in the Market"}
           </h2>
           <div className="border-b-4 border-red-800 w-36 mt-4"></div>
           <div
