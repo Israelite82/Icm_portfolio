@@ -13,33 +13,37 @@ export default function About() {
         const response = await axios.get(`${API_URL}/about`);
         const data = response.data.data || response.data;
         
-        const mappedData = {
-          // Hero section
-          hero_headline: data.hero_section?.headline || "",
-          hero_subtext: data.hero_section?.subtext || "",
-          hero_background_image: data.hero_section?.background_image_path 
-            ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}` 
-            : null,
-          hero_button_text: data.hero_section?.button?.text || "",
-          hero_button_link: data.hero_section?.button?.link || "",
-          
-          // Brand story
-          brand_story: data.brand_story?.academic_biography || "",
-          academic_biography: data.brand_story?.academic_biography || "",
-          
-          // Apostle section
-          apostle_name: data.brand_story?.apostle?.name || "",
-          apostle_content: data.brand_story?.academic_biography || "",
-          apostle_image: data.brand_story?.apostle?.image_path 
-            ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image_path}`
-            : null,
-          
-          // Missions
-          mission_statement_1: data.missions?.mission_statement_1 || "",
-          mission_statement_2: data.missions?.mission_statement_2 || "",
-          track_record_title: data.missions?.track_record?.title || "",
-          track_record_content: data.missions?.track_record?.description || "",
-        };
+       const mappedData = {
+  // Hero section
+  hero_headline: data.hero_section?.headline || "",
+  hero_subtext: data.hero_section?.subtext || "",
+  hero_background_image: data.hero_section?.background_image_path 
+    ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}` 
+    : null,
+  hero_button_text: data.hero_section?.button?.text || "",
+  hero_button_link: data.hero_section?.button?.link || "",
+  
+  // Brand story
+  brand_story: data.brand_story?.academic_biography || "",
+  academic_biography: data.brand_story?.academic_biography || "",
+  
+  // Apostle section
+  apostle_name: data.brand_story?.apostle?.name || "",
+  apostle_content: data.brand_story?.academic_biography || "",
+  apostle_image: data.brand_story?.apostle?.image_path 
+    ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image_path}`
+    : null,
+  
+  // Missions
+  mission_statement_1: data.missions?.mission_statement_1 || "",
+  mission_statement_2: data.missions?.mission_statement_2 || "",
+  track_record_title: data.missions?.track_record?.title || "",
+  track_record_content: data.missions?.track_record?.description || "",
+  
+  // Social media links - ADD THESE TWO LINES
+  youtube_link: data.youtube_link || "",
+  linkedin_link: data.linkedin_link || "",
+};
         
         setAboutData(mappedData);
       } catch (error) {
@@ -270,10 +274,23 @@ export default function About() {
                     className="w-full h-96 object-cover rounded-xl"
                   />
                 </div>
-                <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
-                  <img src="youtube.png" alt="Radio Icon" />
-                  <img src="linkdin.png" alt="" />
-                </div>
+             <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
+          <a 
+            href={aboutData?.youtube_link || "https://www.youtube.com/@theanchor1079"} 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <img src="youtube.png" alt="YouTube" className="cursor-pointer h-12" />
+          </a>
+
+          <a 
+            href={aboutData?.linkedin_link || "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"} 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <img src="linkedin.png" alt="LinkedIn" className="cursor-pointer" />
+          </a>
+       </div>
                 <hr className="border-gray-500" />
                 <div className="bg-white border-l-8 border-t-8 border-gray-600 rounded-3xl p-6">
                   <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-3">
