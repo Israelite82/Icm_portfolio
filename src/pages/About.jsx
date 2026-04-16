@@ -12,39 +12,42 @@ export default function About() {
       try {
         const response = await axios.get(`${API_URL}/about`);
         const data = response.data.data || response.data;
-        
-       const mappedData = {
-  // Hero section
-  hero_headline: data.hero_section?.headline || "",
-  hero_subtext: data.hero_section?.subtext || "",
-  hero_background_image: data.hero_section?.background_image_path 
-    ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}` 
-    : null,
-  hero_button_text: data.hero_section?.button?.text || "",
-  hero_button_link: data.hero_section?.button?.link || "",
-  
-  // Brand story
-  brand_story: data.brand_story?.academic_biography || "",
-  academic_biography: data.brand_story?.academic_biography || "",
-  
-  // Apostle section
-  apostle_name: data.brand_story?.apostle?.name || "",
-  apostle_content: data.brand_story?.academic_biography || "",
-  apostle_image: data.brand_story?.apostle?.image_path 
-    ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image_path}`
-    : null,
-  
-  // Missions
-  mission_statement_1: data.missions?.mission_statement_1 || "",
-  mission_statement_2: data.missions?.mission_statement_2 || "",
-  track_record_title: data.missions?.track_record?.title || "",
-  track_record_content: data.missions?.track_record?.description || "",
-  
-  // Social media links - ADD THESE TWO LINES
-  youtube_link: data.youtube_link || "",
-  linkedin_link: data.linkedin_link || "",
-};
-        
+
+        const mappedData = {
+          // Hero section
+          hero_headline: data.hero_section?.headline || "",
+          hero_subtext: data.hero_section?.subtext || "",
+          hero_background_image: data.hero_section?.background_image_path
+            ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}`
+            : null,
+
+          // Brand story
+          brand_story: data.brand_story.brand_story || "",
+
+          // Academic biography 
+          academic_biography: data.academic_biography || "",
+
+          // Apostle biography 
+          apostle_content: data.apostle_biography || "",
+
+          // Apostle name and image
+          apostle_name: data.apostle_name || "",
+          apostle_image: data.apostle_image_path
+            ? `https://api.osarenemokpae.com/storage/${data.apostle_image_path}`
+            : null,
+
+          // Missions
+          mission_statement_1: data.missions?.mission_statement_1 || "",
+          mission_statement_2: data.missions?.mission_statement_2 || "",
+          mission_statement_3: data.missions?.mission_statement_3 || "",
+          track_record_title: data.missions?.track_record?.title || "",
+          track_record_content: data.missions?.track_record?.description || "",
+
+          // Social media links - ADD THESE TWO LINES
+          youtube_link: data.youtube_link || "",
+          linkedin_link: data.linkedin_link || "",
+        };
+
         setAboutData(mappedData);
       } catch (error) {
         console.error("Error fetching about data:", error);
@@ -84,13 +87,14 @@ export default function About() {
                 {aboutData.hero_headline || "Dr. Osaren Emokpae"}
               </h1>
               <p className="text-xl md:text-md font-semibold text-gray-500 mb-6">
-                {aboutData.hero_subtext?.split('\n')[0] || "A Development Economist"}
+                {aboutData.hero_subtext?.split("\n")[0] ||
+                  "A Development Economist"}
               </p>
-              
+
               {/* Subtitle - remaining paragraphs */}
               {aboutData.hero_subtext && (
                 <div className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
-                  {aboutData.hero_subtext.split('\n').slice(1).join('\n')}
+                  {aboutData.hero_subtext.split("\n").slice(1).join("\n")}
                 </div>
               )}
             </div>
@@ -114,7 +118,9 @@ export default function About() {
           <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 border-l-8 border-t-8 border-black">
             <div className="text-gray-900 leading-relaxed text-sm md:text-base">
               {aboutData.brand_story ? (
-                <div dangerouslySetInnerHTML={{ __html: aboutData.brand_story }} />
+                <div
+                  dangerouslySetInnerHTML={{ __html: aboutData.brand_story }}
+                />
               ) : (
                 <p>Dr. Osaren Emokpae is a distinguished scholar...</p>
               )}
@@ -137,7 +143,11 @@ export default function About() {
               </div>
               <div className="mt-6 space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
                 {aboutData.academic_biography ? (
-                  <div dangerouslySetInnerHTML={{ __html: aboutData.academic_biography }} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: aboutData.academic_biography,
+                    }}
+                  />
                 ) : (
                   <p>Dr. Osaren Emokpae is a world renowned authority...</p>
                 )}
@@ -219,7 +229,11 @@ export default function About() {
                 </h2>
                 <div className="space-y-6 text-gray-800 text-md md:text-base leading-relaxed">
                   {aboutData.apostle_content ? (
-                    <div dangerouslySetInnerHTML={{ __html: aboutData.apostle_content }} />
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: aboutData.apostle_content,
+                      }}
+                    />
                   ) : (
                     <>
                       <p>National Leader/General Overseer Emeritus...</p>
@@ -237,7 +251,9 @@ export default function About() {
                     <div className="flex items-start gap-3">
                       <img src="Frame-book.png" alt="" />
                       <div>
-                        <p className="text-gray-500 text-sm mb-1">Christian Leadership</p>
+                        <p className="text-gray-500 text-sm mb-1">
+                          Christian Leadership
+                        </p>
                         <p className="text-sm md:text-base font-semibold text-gray-600">
                           Haggai Institute Hawaii, U.S.A
                         </p>
@@ -246,7 +262,9 @@ export default function About() {
                     <div className="flex items-start gap-3">
                       <img src="Frame-book.png" alt="" />
                       <div>
-                        <p className="text-gray-500 text-sm mb-1">Christian Leadership</p>
+                        <p className="text-gray-500 text-sm mb-1">
+                          Christian Leadership
+                        </p>
                         <p className="text-sm md:text-base font-semibold text-gray-600">
                           British Foursquare Seminary, Hastings
                         </p>
@@ -255,7 +273,9 @@ export default function About() {
                     <div className="flex items-start gap-3">
                       <img src="Frame-book.png" alt="" />
                       <div>
-                        <p className="text-gray-500 text-sm mb-1">Christian Leadership</p>
+                        <p className="text-gray-500 text-sm mb-1">
+                          Christian Leadership
+                        </p>
                         <p className="text-sm md:text-base font-semibold text-gray-600">
                           Trinity College, U.S.A
                         </p>
@@ -274,30 +294,46 @@ export default function About() {
                     className="w-full h-96 object-cover rounded-xl"
                   />
                 </div>
-             <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
-          <a 
-            href={aboutData?.youtube_link || "https://www.youtube.com/@theanchor1079"} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <img src="youtube.png" alt="YouTube" className="cursor-pointer h-12" />
-          </a>
+                <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
+                  <a
+                    href={
+                      aboutData?.youtube_link ||
+                      "https://www.youtube.com/@theanchor1079"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="youtube.png"
+                      alt="YouTube"
+                      className="cursor-pointer h-12"
+                    />
+                  </a>
 
-          <a 
-            href={aboutData?.linkedin_link || "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <img src="linkedin.png" alt="LinkedIn" className="cursor-pointer" />
-          </a>
-       </div>
+                  <a
+                    href={
+                      aboutData?.linkedin_link ||
+                      "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="linkedin.png"
+                      alt="LinkedIn"
+                      className="cursor-pointer"
+                    />
+                  </a>
+                </div>
                 <hr className="border-gray-500" />
                 <div className="bg-white border-l-8 border-t-8 border-gray-600 rounded-3xl p-6">
                   <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-3">
                     <img src="fire.png" alt="" />
                     Passion
                   </h3>
-                  <p className="text-gray-700">Monitoring the next generation of leaders</p>
+                  <p className="text-gray-700">
+                    Monitoring the next generation of leaders
+                  </p>
                 </div>
                 <hr className="border-gray-500" />
               </div>
@@ -317,15 +353,21 @@ export default function About() {
             {/* First Box - Mission Statement 1 */}
             <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-10">
               {aboutData.mission_statement_1 ? (
-                <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: aboutData.mission_statement_1 }} />
+                <div
+                  className="text-gray-800"
+                  dangerouslySetInnerHTML={{
+                    __html: aboutData.mission_statement_1,
+                  }}
+                />
               ) : (
                 <>
                   <p className="text-md text-gray-800 leading-relaxed">
                     A National Leader/General Overseer Emeritus of Foursquare
-                    Gospel Church Trinidad & Tobago and Guyana, Executive Counsellor
-                    Emeritus of Foursquare Nigeria, Dr. Emokpae now serves as the
-                    President and Presiding Apostle of Macedonia Call
-                    Global Assembly—a ministry with a powerful global vision.
+                    Gospel Church Trinidad & Tobago and Guyana, Executive
+                    Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
+                    serves as the President and Presiding Apostle of Macedonia
+                    Call Global Assembly—a ministry with a powerful global
+                    vision.
                   </p>
                 </>
               )}
@@ -334,32 +376,48 @@ export default function About() {
             {/* Second Box - Mission Statement 2 */}
             <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
               {aboutData.mission_statement_2 ? (
-                <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: aboutData.mission_statement_2 }} />
+                <div
+                  className="text-gray-800"
+                  dangerouslySetInnerHTML={{
+                    __html: aboutData.mission_statement_2,
+                  }}
+                />
               ) : (
                 <>
                   <p className="text-md text-gray-800 leading-relaxed">
-                    The vision for Macedonia Call Global Assembly was birthed in his
-                    heart in 2008 while in Brixton, United Kingdom, within the Foursquare
-                    movement, and was later incorporated at The Summit in
-                    Columbia, USA. What began as a divine revelation has since grown
-                    into an independent global ministry committed to accelerating the
-                    discipling of nations in preparation for the return of our Savior.
+                    The vision for Macedonia Call Global Assembly was birthed in
+                    his heart in 2008 while in Brixton, United Kingdom, within
+                    the Foursquare movement, and was later incorporated at The
+                    Summit in Columbia, USA. What began as a divine revelation
+                    has since grown into an independent global ministry
+                    committed to accelerating the discipling of nations in
+                    preparation for the return of our Savior.
                   </p>
                 </>
               )}
             </div>
 
-            {/* Third Box - Additional content */}
-            <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
-              <p className="text-md text-gray-800 leading-relaxed">
-                Under his pastoral leadership, he and his team planted thirteen
-                churches within the Foursquare movement in Nigeria, three in
-                United Kingdom, one in Dominican Republic, one in Guyana and one in
-                the USA. Among the Foursquare churches he planted in
-                Nigeria is the Foursquare Grand Assembly, a remarkable
-                congregation made up of three dynamic expressions: the Youth
-                Church, the Church for Street Urchins, and the Main Church.
-              </p>
+            {/* Third Box - mission statement 3 */}
+            <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6 break-words overflow-hidden">
+              {aboutData.mission_statement_3 ? (
+                <div
+                  className="text-gray-800 break-words"
+                  dangerouslySetInnerHTML={{
+                    __html: aboutData.mission_statement_3,
+                  }}
+                />
+              ) : (
+                <p className="text-md text-gray-800 leading-relaxed break-words">
+                  Under his pastoral leadership, he and his team planted
+                  thirteen churches within the Foursquare movement in Nigeria,
+                  three in United Kingdom, one in Dominican Republic, one in
+                  Guyana and one in the USA. Among the Foursquare churches he
+                  planted in Nigeria is the Foursquare Grand Assembly, a
+                  remarkable congregation made up of three dynamic expressions:
+                  the Youth Church, the Church for Street Urchins, and the Main
+                  Church.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -369,7 +427,8 @@ export default function About() {
       <section className="w-full py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl text-gray-900 font-bold">
-            {aboutData.track_record_title || "A Track Record of Excellence in the Market"}
+            {aboutData.track_record_title ||
+              "A Track Record of Excellence in the Market"}
           </h2>
           <div className="border-b-4 border-red-800 w-36 mt-4"></div>
           <div
@@ -378,7 +437,11 @@ export default function About() {
           >
             <div className="space-y-5 text-gray-900 text-sm md:text-base leading-relaxed">
               {aboutData.track_record_content ? (
-                <div dangerouslySetInnerHTML={{ __html: aboutData.track_record_content }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: aboutData.track_record_content,
+                  }}
+                />
               ) : (
                 <p>Dr. Osaren Emokpae is a transformational force...</p>
               )}
@@ -392,27 +455,39 @@ export default function About() {
       {/* TOP SKILLS SECTION - Static */}
       <section className="w-full bg-white py-12 md:py-14">
         <div className="max-w-6xl mx-auto px-4 md:px-4">
-          <h2 className="text-2xl md:text-3xl text-gray-800 font-bold mb-8">Top Skills</h2>
+          <h2 className="text-2xl md:text-3xl text-gray-800 font-bold mb-8">
+            Top Skills
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4 bg-[#FFF5E1] rounded-2xl rounded-r-full rounded-l-none p-2">
             <div className="flex items-center gap-2">
               <img src="monitoring.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">Mentoring</p>
+              <p className="font-semibold text-base md:text-md text-gray-700">
+                Mentoring
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <img src="organize.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">Organizational Leadership</p>
+              <p className="font-semibold text-base md:text-md text-gray-700">
+                Organizational Leadership
+              </p>
             </div>
             <div className="flex items-center gap-2 pt-16">
               <img src="managing.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">Managing Organizational Performance</p>
+              <p className="font-semibold text-base md:text-md text-gray-700">
+                Managing Organizational Performance
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <img src="planning.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">Strategic Planning</p>
+              <p className="font-semibold text-base md:text-md text-gray-700">
+                Strategic Planning
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <img src="economic.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">Economic Development</p>
+              <p className="font-semibold text-base md:text-md text-gray-700">
+                Economic Development
+              </p>
             </div>
           </div>
         </div>
