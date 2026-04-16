@@ -25,15 +25,15 @@ export default function About() {
           brand_story: data.brand_story.brand_story || "",
 
           // Academic biography 
-          academic_biography: data.academic_biography || "",
+          academic_biography: data.brand_story.academic_biography || "",
 
           // Apostle biography 
-          apostle_content: data.apostle_biography || "",
+          apostle_content: data.brand_story.apostle_biography || "",
 
           // Apostle name and image
-          apostle_name: data.apostle_name || "",
-          apostle_image: data.apostle_image_path
-            ? `https://api.osarenemokpae.com/storage/${data.apostle_image_path}`
+          apostle_name: data.brand_story.apostle.name || "",
+          apostle_image: data.brand_story.apostle.image
+            ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image}`
             : null,
 
           // Missions
