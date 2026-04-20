@@ -95,7 +95,7 @@ export default function About() {
               {aboutData.hero_subtext && (
                 <div className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
                   {aboutData.hero_subtext.split("\n").slice(1).join("\n")}
-                </div>
+                </div> 
               )}
             </div>
           </div>

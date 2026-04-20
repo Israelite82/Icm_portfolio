@@ -39,11 +39,11 @@ export default function Books() {
       </section>
 
       {/* Featured Book Hero */}
-      <section className="w-full bg-[#FFF5E1] py-6 md:py-8 flex justify-center px-4 mb-4">
+      <section className="w-full bg-[#FFF5E1] py-2 md:py-2 flex justify-center px-4 mb-4">
         <img 
           src="/booksec_hero.png" 
           alt="Featured Book" 
-          className="w-full max-w-4xl h-auto object-contain"
+          className="w-full max-w-4xl h-[350px] object-contain"
         />
       </section>
 
