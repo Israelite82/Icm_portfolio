@@ -5,6 +5,7 @@ const API_URL = "https://api.osarenemokpae.com/api";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
+  console.log("First book data:", books[0]);
 
   useEffect(() => {
     
@@ -16,6 +17,7 @@ export default function Books() {
       .catch(err => console.error("Error fetching books:", err));
   }, []); 
       console.log("Fetched books:", books);
+      
   return (
     <div className="min-h-screen w-full bg-gray-100">
       {/* BOOKS HERO */}
@@ -47,20 +49,34 @@ export default function Books() {
         />
       </section>
 
-     {/* Books Grid Section */}
+    {/* Books Grid Section */}
 <section className="w-full bg-gray-100 px-4 md:px-8 lg:px-12 pb-12 md:pb-16">
   <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto">
     {books.length > 0 ? (
       books.map((book) => (
-        <img
-          key={book.id}
-          src={book.book_cover?.startsWith('http') ? book.book_cover : `https://api.osarenemokpae.com${book.book_cover}`}
-          alt={book.title}
-          className="w-full h-auto object-cover rounded-lg shadow-md"
-          onError={(e) => {
-            e.target.src = "https://api.osarenemokpa.com/booksec1.png";
-          }}
-        />
+        <div key={book.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <img
+            src={book.book_cover?.startsWith('http') ? book.book_cover : `https://api.osarenemokpae.com${book.book_cover}`}
+            alt={book.title}
+            className="w-full h-auto object-cover"
+            onError={(e) => {
+              e.target.src = "https://api.osarenemokpa.com/booksec1.png";
+            }}
+          />
+          {/* ADD THE LINK HERE - uses the 'book' field from admin */}
+          {book.link && (
+            <div className="p-3 pt-2">
+              <a 
+                href={book.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-green-800 hover:text-blue-800 hover:underline block text-center"
+              >
+                Learn More →
+              </a>
+            </div>
+          )}
+        </div>
       ))
     ) : (
       <p className="col-span-3 text-center text-gray-500">Loading books...</p>
