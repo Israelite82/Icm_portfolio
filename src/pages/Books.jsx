@@ -8,13 +8,14 @@ export default function Books() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${API_URL}/books`)
-      .then(res => {
+    axios
+      .get(`${API_URL}/books`)
+      .then((res) => {
         const booksData = res.data.data?.data || res.data.data || res.data;
         setBooks(Array.isArray(booksData) ? booksData : []);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching books:", err);
         setLoading(false);
       });
@@ -22,7 +23,7 @@ export default function Books() {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white flex items-center justify-center">
         <div className="text-gray-500">Loading books...</div>
       </div>
     );
@@ -55,71 +56,88 @@ export default function Books() {
       </section> */}
 
       {/* Books List Section - Vertical Layout WITH IMAGES */}
-      <section className="w-full bg-gray-100 px-4 md:px-8 lg:px-12 py-12 md:py-16 pb-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="w-full bg-white px-4 md:px-8 lg:px-12 py-12 md:py-16">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Discover Your Next Masterpiece
-            </h2>
-            <p className="text-gray-600">
-              Browse through the curated collection from Dr. Osaren Emokpae
-            </p>
-          </div>
 
           {/* Books List - Vertical Layout */}
           <div className="space-y-8 md:space-y-10">
             {books.length > 0 ? (
-              books.map((book) => (
-                <div key={book.id} className="bg-[#FFF5E1E3] rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row">
-                  {/* Book Cover Image - Left side */}
-                  <div className="md:w-1/3">
-                    <img
-                      src={book.book_cover?.startsWith('http') ? book.book_cover : `https://api.osarenemokpae.com${book.book_cover}`}
-                      alt={book.title}
-                      className="w-full h-64 md:h-full object-cover"
-                      onError={(e) => {
-                        e.target.src = "https://api.osarenemokpa.com/booksec1.png";
-                      }}
-                    />
+              books.map((book, index) => (
+                <div key={book.id}>
+                  <div className="bg-[#FFF5E1E3] rounded-xl overflow-hidden flex flex-col md:flex-row  gap-6 md:gap-8 shadow-[-6px_-6px_0px_0px_rgba(0,0,0,0.4)]">
+                    {/* Book Cover Image - Left side with padding */}
+                    <div className="md:w-1/3 p-4 md:p-5">
+                      <img
+                        src={
+                          book.book_cover?.startsWith("http")
+                            ? book.book_cover
+                            : `https://api.osarenemokpae.com${book.book_cover}`
+                        }
+                        alt={book.title}
+                        className="w-full h-64 md:h-auto object-cover rounded-lg"
+                        onError={(e) => {
+                          e.target.src =
+                            "https://api.osarenemokpa.com/booksec1.png";
+                        }}
+                      />
+                    </div>
+
+                    {/* Book Details - Right side with padding */}
+                    <div className="p-6 md:p-8 flex-1">
+                      {/* Book Title */}
+                      {(() => {
+                        const words = book.title?.split(" ") || [];
+                        const firstPart = words.slice(0, 3).join(" ");
+                        const secondPart = words.slice(3).join(" ");
+                        return (
+                          <>
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-10">
+                              {firstPart}
+                            </h3>
+                            {secondPart && (
+                              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                                {secondPart}
+                              </h3>
+                            )}
+                          </>
+                        );
+                      })()}
+
+                      {/* Subtitle */}
+                      {book.subtitle && (
+                        <h4 className="text-lg md:text-xl font-semibold text-gray-700 mb-2">
+                          {book.subtitle}
+                        </h4>
+                      )}
+
+                      {/* Author */}
+                      <p className="text-gray-600 font-medium mb-4">
+                        {book.author || "Osaren Emokpae"}
+                      </p>
+
+                      {/* Description */}
+                      <p className="text-gray-600 leading-relaxed mb-4">
+                        {book.description}
+                      </p>
+
+                      {/* Buy Button */}
+                      {(book.link || book.book || book.amazon) && (
+                        <a
+                          href={book.link || book.book || book.amazon}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-white mt-6 inline-block text-gray-700 border border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-300 px-8 py-1 rounded-full text-sm font-medium"
+                        >
+                          Buy
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  
-                  {/* Book Details - Right side */}
-                  <div className="p-6 md:p-8 flex-1">
-                    {/* Book Title */}
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
-                      {book.title}
-                    </h3>
-                    
-                    {/* Subtitle */}
-                    {book.subtitle && (
-                      <h4 className="text-lg md:text-xl font-semibold text-gray-700 mb-2">
-                        {book.subtitle}
-                      </h4>
-                    )}
-                    
-                    {/* Author */}
-                    <p className="text-gray-600 font-medium mb-3">
-                      {book.author || "Osaren Emokpae"}
-                    </p>
-                    
-                    {/* Description */}
-                    <p className="text-gray-600 leading-relaxed mb-4">
-                      {book.description}
-                    </p>
-                    
-                    {/* Buy Button */}
-                    {(book.link || book.book) && (
-                      <a 
-                        href={book.link || book.book}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block text-gray-700 border border-gray-700 hover:bg-gray-700 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full text-sm font-medium"
-                      >
-                        Buy
-                      </a>
-                    )}
-                  </div>
+                  {/* Horizontal line after every 4 books (index 3, 7, 11, etc.) */}
+                  {(index + 1) % 4 === 0 && index !== books.length - 1 && (
+                    <hr className="mt-16 mb-16  border-t-2  border-gray-300" />
+                  )}
                 </div>
               ))
             ) : (

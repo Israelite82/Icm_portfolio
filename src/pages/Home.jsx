@@ -171,7 +171,7 @@ export default function Home() {
           </li>
         </ul>
 
-       <a href="https://www.linkedin.com/in/osaren-emokpae/" target="_blank" rel="noopener noreferrer">
+       <a href="https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/" target="_blank" rel="noopener noreferrer">
           <img src="linkedin-white.png" alt="LinkedIn" className="mr-10 hover:scale-125 transition-transform duration-300" />
         </a>
 
