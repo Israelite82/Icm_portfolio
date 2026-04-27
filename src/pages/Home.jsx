@@ -171,9 +171,9 @@ export default function Home() {
           </li>
         </ul>
 
-        <button className="bg-[#6B0F1A] hover:bg-red-800 transition px-4 md:px-5 py-2 md:py-3 rounded-lg text-xs md:text-sm">
-          Subscribe
-        </button>
+       <a href="https://www.linkedin.com/in/osaren-emokpae/" target="_blank" rel="noopener noreferrer">
+          <img src="linkedin-white.png" alt="LinkedIn" className="mr-10 hover:scale-125 transition-transform duration-300" />
+        </a>
 
         {menuOpen && (
           <div
@@ -335,11 +335,11 @@ export default function Home() {
 
       {/* BIOGRAPHY CARD */}
       <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-20">
-        <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-10 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
+        <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-6 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
           <img
             src="/second-Img.png"
             alt="Biography"
-            className="w-full h-65 md:h-[32rem] object-cover rounded-xl"
+            className="w-full h-65 md:h-[24rem] object-cover rounded-xl"
           />
           <p className="text-sm md:text-base leading-relaxed md:mt-14">
             Dr. Osaren Philips Emokpae is an Erudite Scholar, Global Apostle,
@@ -356,11 +356,11 @@ export default function Home() {
 
       {/* BOOKS SECTION - Visibility controlled */}
       {visibility.Books && (
-        <section className="relative w-full mt-20 md:mt-32 px-4">
-          <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[400px] md:h-[350px] bg-[#6B0F1A] z-0"></div>
-          <div className="relative max-w-5xl mx-auto px-2 md:px-4 z-10">
-            <div className="bg-white rounded-md p-4 md:p-8 shadow-lg">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 place-items-center">
+        <section className="relative w-full mt-20 md:mt-32 pb-4 px-4">
+          <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px]  bg-[#16233B] z-0"></div>
+          <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
+            
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 place-items-center">
                 {books.length > 0
                   ? books.map((book) => (
                       <img
@@ -371,12 +371,12 @@ export default function Home() {
                             : `https://api.osarenemokpae.com${book.book_cover}`
                         }
                         alt={book.title || book.post_title}
-                        className="h-32 md:h-[13rem] w-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-300"
+                        className="h-32 md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
                         onClick={() => navigate(`/books/${book.id}`)}
                         onError={(e) => {
                           e.target.src = "/book-placeholder.png";
                         }}
-                      />
+                      />  
                     ))
                   : [1, 2, 3, 4].map((i) => (
                       <div
@@ -386,20 +386,47 @@ export default function Home() {
                     ))}
               </div>
             </div>
-          </div>
         </section>
       )}
 
+      {/* MEDIA */}
+<section className="max-w-4xl mx-auto px-4 md:px-2 mt-40 md:mt-1 pb-4 md:pb-2">
+  <div className="text-center">
+    <p className="text-gray-700 mb-4 font-medium">
+      Click the image below to watch our teachings on YouTube
+    </p>
+    <a
+      href="https://www.youtube.com/@theanchor1079"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block transition-transform hover:scale-105 duration-300"
+    >
+      <div className="bg-red-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="white" 
+          className="w-32 h-10 md:w-40 md:h-10"
+        >
+          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM10 16.5v-9l6 4.5-6 4.5z"/>
+        </svg>
+        <p className="text-white text-sm font-semibold mt-3">YouTube Channel</p>
+      </div>
+    </a>
+  </div>
+</section>    
+       
+
       {/* MESSAGE CARDS (BLOG SECTION) - Visibility controlled */}
       {visibility.Blog && (
-        <section className="relative max-w-7xl mx-auto px-4 md:px-12 mt-20 md:mt-28">
+        <section className="relative max-w-7xl mx-auto px-4 md:px-12 mt-20 md:mt-18">
           <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[76rem] rounded-md -top-10 h-auto md:h-[320px] bg-[#16233B] z-0"></div>
-          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0">
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-1 ">
             {blogPosts.length > 0
               ? blogPosts.map((post) => (
                   <div
                     key={post.id}
-                    className="bg-[#f6ecd9] text-gray-800 rounded-md p-5 shadow-lg w-full md:max-w-[310px] h-auto md:h-[280px] md:justify-self-center flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                    className="bg-[#f6ecd9] text-gray-800 rounded-md p-5 -mt-5 shadow-lg w-full md:max-w-[350px] h-auto md:h-[280px] md:justify-self-center flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300"
                     onClick={() => handleReadMore(post.id)}
                   >
                     <h3 className="font-bold mb-3 text-base md:text-lg line-clamp-2">
@@ -431,14 +458,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* MEDIA */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 mt-20 md:mt-32 pb-16 md:pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <img src="/flyer1.png" alt="" className="w-full rounded-lg" />
-          <img src="/flyer2.png" alt="" className="w-full rounded-lg" />
-          <img src="/flyer3.png" alt="" className="w-full rounded-lg" />
-        </div>
-      </section>
+     
     </>
   );
 }

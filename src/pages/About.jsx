@@ -24,10 +24,10 @@ export default function About() {
           // Brand story
           brand_story: data.brand_story.brand_story || "",
 
-          // Academic biography 
+          // Academic biography
           academic_biography: data.brand_story.academic_biography || "",
 
-          // Apostle biography 
+          // Apostle biography
           apostle_content: data.brand_story.apostle_biography || "",
 
           // Apostle name and image
@@ -95,7 +95,7 @@ export default function About() {
               {aboutData.hero_subtext && (
                 <div className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
                   {aboutData.hero_subtext.split("\n").slice(1).join("\n")}
-                </div> 
+                </div>
               )}
             </div>
           </div>
@@ -266,19 +266,11 @@ export default function About() {
                           Christian Leadership
                         </p>
                         <p className="text-sm md:text-base font-semibold text-gray-600">
-                          British Foursquare Seminary, Hastings
+                          British Foursquare Seminary,
                         </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <img src="Frame-book.png" alt="" />
-                      <div>
-                        <p className="text-gray-500 text-sm mb-1">
-                          Christian Leadership
-                        </p>
-                        <p className="text-sm md:text-base font-semibold text-gray-600">
-                          Trinity College, U.S.A
-                        </p>
+                        <span className="text-sm md:text-base font-semibold text-gray-600">
+                          Hastings
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -349,32 +341,31 @@ export default function About() {
             Mission
           </h2>
           <div className="border-b-4 border-red-700 w-16 mt-4"></div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-start">
-            {/* First Box - Mission Statement 1 */}
-            <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-10">
-              {aboutData.mission_statement_1 ? (
-                <div
-                  className="text-gray-800"
-                  dangerouslySetInnerHTML={{
-                    __html: aboutData.mission_statement_1,
-                  }}
-                />
-              ) : (
-                <>
-                  <p className="text-md text-gray-800 leading-relaxed">
-                    A National Leader/General Overseer Emeritus of Foursquare
-                    Gospel Church Trinidad & Tobago and Guyana, Executive
-                    Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
-                    serves as the President and Presiding Apostle of Macedonia
-                    Call Global Assembly—a ministry with a powerful global
-                    vision.
-                  </p>
-                </>
-              )}
-            </div>
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-start"> */}
+          {/* First Box - Mission Statement 1 */}
+          <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0 border-gray-400  shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+            {aboutData.mission_statement_1 ? (
+              <div
+                className="text-gray-800"
+                dangerouslySetInnerHTML={{
+                  __html: aboutData.mission_statement_1,
+                }}
+              />
+            ) : (
+              <>
+                <p className="text-md text-gray-800 leading-relaxed">
+                  A National Leader/General Overseer Emeritus of Foursquare
+                  Gospel Church Trinidad & Tobago and Guyana, Executive
+                  Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
+                  serves as the President and Presiding Apostle of Macedonia
+                  Call Global Assembly—a ministry with a powerful global vision.
+                </p>
+              </>
+            )}
+          </div>
 
-            {/* Second Box - Mission Statement 2 */}
-            <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
+          {/* Second Box - Mission Statement 2 */}
+          {/* <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
               {aboutData.mission_statement_2 ? (
                 <div
                   className="text-gray-800"
@@ -395,10 +386,10 @@ export default function About() {
                   </p>
                 </>
               )}
-            </div>
+            </div> */}
 
-            {/* Third Box - mission statement 3 */}
-            <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6 break-words overflow-hidden">
+          {/* Third Box - mission statement 3 */}
+          {/* <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6 break-words overflow-hidden">
               {aboutData.mission_statement_3 ? (
                 <div
                   className="text-gray-800 break-words"
@@ -418,9 +409,9 @@ export default function About() {
                   Church.
                 </p>
               )}
-            </div>
-          </div>
+            </div> */}
         </div>
+        {/* </div> */}
       </section>
 
       {/* TRACK RECORD SECTION */}
@@ -450,6 +441,71 @@ export default function About() {
         </div>
       </section>
 
+      <section className="w-full py-12 md:py-13 -mt-8">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="bg-[#FFF5E1] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 items-start max-w-6xl mx-auto px-4 md:px-8">
+            {/* Left - Text */}
+            <div className="space-y-2 mt-10">
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                Dr Osaren Emokpae was as an adjunct professor in University of
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                Lagos in 1995 teaching MSc and MBAs in Organisational{" "}
+              </p>
+
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                behaviour and Marketing. He was a lecturer on Marketing in{" "}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                Unilever and UAC training Schools in Apapa and Ikoyi.
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                He also lectured on Digital Divide in Rhodes university
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                South Africa in 2000; as well as teaching Strategic Planning
+                in{" "}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                Foursquare Institute of Leadership and Futures studies for many
+                years.
+              </p>
+              <br />
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                He was a regular Resource Person teaching in ARCON and{" "}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                Institute of Marketing Programs. He taught on Career choice in
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                Young Enterprise United Kingdom and he is currently the{" "}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                Chairman of NOPSI (Nigerian Oversees Prisoners Support
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                {" "}
+                Initiative) headquartered in the United Kingdom.
+              </p>
+            </div>
+
+            {/* Right - Image */}
+            <div>
+              <img
+                src="certificate.png"
+                alt="Section image"
+                className="w-full h-[550px] rounded-lg mt-4 mb-4"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
       <hr className="border-red-900" />
 
       {/* TOP SKILLS SECTION - Static */}

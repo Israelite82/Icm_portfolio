@@ -72,7 +72,7 @@ export default function Footer() {
       {/* Copyright */}
       <div className="ml-8 pb-8">
         <p className="text-start text-gray-400 text-sm">
-          © 2025 Dr. Osaren Emokpae All rights reserved.
+          © 2026 Dr. Osaren Emokpae All rights reserved.
         </p>
         <a href="https://it-portfolio-admin.onrender.com" className='text-xs text-gray-700 ml-4'>Control</a>
       </div>
