@@ -115,7 +115,7 @@ export default function Teaching() {
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 line-clamp-3">
                       {teaching.description || teaching.excerpt || "Click to read more..."}
                     </p>
-
+{/* 
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -124,7 +124,7 @@ export default function Teaching() {
                      className="text-[#071b34] font-semibold hover:underline text-sm md:text-base outline-none border-none bg-transparent cursor-pointer"
                     >
                       Read more →
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               ))}

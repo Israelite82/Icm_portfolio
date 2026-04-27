@@ -32,19 +32,25 @@ export default function Books() {
   return (
     <div className="min-h-screen w-full bg-gray-100">
       {/* BOOKS HERO */}
-      <section className="w-full bg-gradient-to-b from-[#071b34] to-[#06152b]">
-        <div className="max-w-7xl mx-auto min-h-[300px] md:h-[380px] px-4 md:px-6 py-12 md:py-0 relative overflow-hidden">
-          <div className="md:mt-20 max-w-3xl relative z-10">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
-              Books Catalogue
-            </h1>
-            <p className="text-gray-300 text-base md:text-lg">
-              Explore the works of Dr. Osaren Emokpae
-            </p>
-          </div>
-          <div className="absolute left-1/2 -translate-x-1/2 top-[70%] md:left-auto md:right-0 md:top-1/2 md:-translate-y-[70%] md:translate-x-0 w-[200px] h-[120px] md:w-[340px] md:h-[200px] bg-gray-400/60 rounded-[50%]"></div>
-        </div>
-      </section>
+     <section className="w-full bg-gray-300 relative">
+  <div className="max-w-7xl mx-auto min-h-[300px] md:h-[380px] px-4 md:px-6 py-12 md:py-0 relative overflow-hidden">
+    {/* White faded circle background */}
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[180px] md:w-[500px] md:h-[130px] bg-white/60 rounded-[50%] blur-2xl"></div>
+    
+    {/* Content centered on top of the circle */}
+    <div className="relative z-10 h-full flex flex-col items-center justify-center text-center">
+      <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+        Discover Your Next Masterpiece
+      </h1>
+      <p className="text-gray-500 text-base md:text-lg font-bold">
+       Browse through the curated collection from Dr. Osaren Emokpae
+      </p>
+    </div>
+    
+    {/* Decorative oval - removed or kept separate */}
+    {/* <div className="absolute left-1/2 -translate-x-1/2 top-[70%] md:left-auto md:right-0 md:top-1/2 md:-translate-y-[70%] md:translate-x-0 w-[200px] h-[120px] md:w-[340px] md:h-[200px] bg-gray-400/60 rounded-[50%]"></div> */}
+  </div>
+</section>
 
       {/* Featured Book Hero */}
       {/* <section className="w-full bg-[#FFF5E1] py-2 md:py-2 flex justify-center px-4 mb-4">

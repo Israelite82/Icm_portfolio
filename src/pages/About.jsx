@@ -210,6 +210,28 @@ export default function About() {
                       </p>
                     </div>
                   </div>
+                  <div className="flex items-start gap-3">
+                    <img src="location.png" alt="" className="mt-1"/>
+                    <div>
+                      <p className="text-gray-400 text-md">
+                        Location
+                      </p>
+                      <p className="text-sm md:text-base font-semibold text-gray-600">
+                        The Summit, Autumn Glen, Columbia, U.S.A
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <img src="mail.png" alt="" className="mt-2" />
+                    <div>
+                      <p className="text-gray-400 text-md ">
+                        Email
+                      </p>
+                      <p className="text-sm md:text-base font-semibold text-gray-600">
+                      osaremokpae@yahoo.com
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
