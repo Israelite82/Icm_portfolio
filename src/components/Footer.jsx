@@ -21,7 +21,7 @@ export default function Footer() {
         {/* About Section */}
         <div>
           <h3 className="text-xl font-bold mb-4 italic">About Dr. Osaren Emokpae</h3>
-          <p className="text-gray-300 text-sm">Author • Teacher • Philanthropist</p>
+          <p className="text-gray-300 text-sm">Scholar • Apostle • Enterpreneur</p>
         </div>
 
         {/* Quick Links */}
