@@ -67,10 +67,10 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Subscribe Button - Always Visible */}
-        <button className="bg-[#6B0F1A] hover:bg-red-800 transition px-4 md:px-5 py-2 md:py-3 rounded-lg text-xs md:text-sm">
-          Subscribe
-        </button>
+        <a href="https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/" target="_blank" rel="noopener noreferrer">
+          <img src="linkedin-white.png" alt="LinkedIn" className="mr-10 hover:scale-125 transition-transform duration-300" />
+        </a>
+
 
         {/* Mobile Menu Overlay */}
         {menuOpen && (

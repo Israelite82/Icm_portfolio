@@ -112,30 +112,13 @@ export default function About() {
         </div>
       </section>
 
-      {/* INTRO PARAGRAPH - Brand Story */}
-      <section className="w-full bg-white py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 border-l-8 border-t-8 border-black">
-            <div className="text-gray-900 leading-relaxed text-sm md:text-base">
-              {aboutData.brand_story ? (
-                <div
-                  dangerouslySetInnerHTML={{ __html: aboutData.brand_story }}
-                />
-              ) : (
-                <p>Dr. Osaren Emokpae is a distinguished scholar...</p>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ACADEMIC SECTION */}
       <section className="w-full bg-white py-12 md:py-16 pl-10">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Left Column: Academic Biography */}
             <div>
-              <div className="flex flex-col items-start mb-6">
+              <div className="flex flex-col items-start mt-10">
                 <h2 className="text-2xl md:text-3xl text-gray-900 font-bold">
                   Academic Biography
                 </h2>
@@ -152,6 +135,31 @@ export default function About() {
                   <p>Dr. Osaren Emokpae is a world renowned authority...</p>
                 )}
               </div>
+
+              <div className="mt-12 font-semibold md:items-start">
+                <div className="flex items-start gap-3 mb-3">
+                  <img src="three.png" alt="" />
+                  <div>
+                    <p className="text-gray-500 text-md mt-1">Fellow ARCON</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 mb-3">
+                  <img src="three.png" alt="" />
+                  <div>
+                    <p className="text-gray-500 text-md mt-1">
+                      Fellow Institute of Marketing
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <img src="three.png" alt="" />
+                  <div>
+                    <p className="text-gray-500 text-md mt-1">
+                      Fellow Institute of Management Consultants
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Column: Academic Profile Box - Static for now */}
@@ -164,37 +172,65 @@ export default function About() {
                   <div className="flex items-start gap-3">
                     <img src="Frame.png" alt="" />
                     <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Ph.D in Political Economic Management
+                      <p className="text-gray-500 text-md mb-1">
+                        Bsc in Economics, 1980
                       </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        University of Century
+                      <p className="text-sm md:text-base font-bold text-gray-400">
+                        University of Calabar, Nigeria
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <img src="Frame.png" alt="" />
                     <div>
-                      <p className="text-gray-400 text-sm mb-2">
+                      <p className="text-gray-500 text-md mb-1">
+                        Msc in Economics (Development Economics), 1990
+                      </p>
+                      <p className="text-sm md:text-base font-bold text-gray-400">
+                        University of Lagos, Nigeria
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <img src="Frame.png" alt="" />
+                    <div>
+                      <p className="text-gray-500 text-md mb-1">
+                        Diploma in Marketing, 1982 - 1984
+                      </p>
+                      <p className="text-sm md:text-base font-bold text-gray-400">
+                        British Institute of Marketing
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <img src="Frame.png" alt="" />
+                    <div>
+                      <p className="text-gray-500 text-md mb-1">
                         Ph.D in Organisational Resilience in Microfinance
                       </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
+                      <p className="text-sm md:text-base font-bold text-gray-400">
                         University of Hertfordshire
                       </p>
                     </div>
                   </div>
-                </div>
-                <h4 className="text-lg md:text-xl text-gray-600 font-bold mb-4 mt-12">
-                  Post Doctoral Degrees
-                </h4>
-                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <img src="Frame.png" alt="" />
+                    <div>
+                      <p className="text-gray-500 text-md mb-1">
+                        Ph.D in Human Resource Management
+                      </p>
+                      <p className="text-sm md:text-base font-bold text-gray-400">
+                        University of Century
+                      </p>
+                    </div>
+                  </div>
                   <div className="flex items-start gap-3">
                     <img src="Frame1.png" alt="" />
                     <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Business Diversification
+                      <p className="text-gray-500 text-md mb-1">
+                        PhD in Business Diversification
                       </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
+                      <p className="text-sm md:text-base font-bold text-gray-700">
                         Oxford University
                       </p>
                     </div>
@@ -202,33 +238,11 @@ export default function About() {
                   <div className="flex items-start gap-3">
                     <img src="Frame1.png" alt="" />
                     <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Resilience of SMEs
+                      <p className="text-gray-500 text-md mb-1">
+                        PhD in Resilience of SMEs
                       </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
+                      <p className="text-sm md:text-base font-bold text-gray-700">
                         Cranfield University
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <img src="location.png" alt="" className="mt-1"/>
-                    <div>
-                      <p className="text-gray-400 text-md">
-                        Location
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        The Summit, Autumn Glen, Columbia, U.S.A
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <img src="mail.png" alt="" className="mt-2" />
-                    <div>
-                      <p className="text-gray-400 text-md ">
-                        Email
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                      osaremokpae@yahoo.com
                       </p>
                     </div>
                   </div>
@@ -445,7 +459,7 @@ export default function About() {
           </h2>
           <div className="border-b-4 border-red-800 w-36 mt-4"></div>
           <div
-            className="bg-[#FFF5E1] rounded-2xl p-8 md:p-12 mt-8 border border-t-4 border-l-4 border-gray-300"
+            className="bg-white rounded-2xl p-8 md:p-12 mt-8 border "
             style={{ borderBottom: "none", borderRight: "none" }}
           >
             <div className="space-y-5 text-gray-900 text-sm md:text-base leading-relaxed">
@@ -528,6 +542,56 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* INTRO PARAGRAPH - Brand Story */}
+      <section className="w-full bg-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="bg-white rounded-3xl p-8 md:p-12 border-r-4 border-b-4 border-gray-300">
+            <div className="text-gray-900 leading-relaxed text-sm md:text-base">
+              {aboutData.brand_story ? (
+                <div
+                  dangerouslySetInnerHTML={{ __html: aboutData.brand_story }}
+                />
+              ) : (
+                <p>Dr. Osaren Emokpae is a distinguished scholar...</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+         {/* Location and email */}
+      <section className="w-full py-12 md:py-13 -mt-8">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="bg-white grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-60 mt-8 items-start max-w-6xl mx-auto px-4 md:px-8">
+            <div className="flex items-start gap-3">
+              <img src="location.png" alt="" className="mt-6"/>
+              <div>
+                <p className="text-gray-500 text-md mb-1">
+                  Location
+                </p>
+                <p className="text-sm md:text-base font-bold text-gray-600">
+                 The Summit, Autumn Glen, 
+                </p>
+                <p className="text-sm md:text-base font-bold text-gray-600">Columbia, U.S.A</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <img src="mail.png" alt="" />
+              <div>
+                <p className="text-gray-500 text-md mb-1">
+                  Email
+                </p>
+                <p className="text-sm md:text-base font-bold text-gray-600">
+                 osaremokpae@yahoo.com
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <hr className="border-red-900" />
 
       {/* TOP SKILLS SECTION - Static */}

@@ -8,7 +8,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [books, setBooks] = useState([]);
+  const [_books, setBooks] = useState([]);
   const [blogPosts, setBlogPosts] = useState([]);
 
   // State for homepage settings from admin
