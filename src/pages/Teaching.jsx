@@ -40,7 +40,7 @@ export default function Teaching() {
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-milkWhite">
       {/* TEACHING HERO */}
       <section className="w-full bg-gradient-to-b from-[#071b34] to-[#06152b]">
-        <div className="max-w-7xl mx-auto min-h-[300px] md:h-[450px] px-4 md:px-6 py-12 md:py-0 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto min-h-[300px] md:h-[350px] px-4 md:px-6 py-12 md:py-0 relative overflow-hidden">
           <div className="md:mt-20 max-w-3xl relative z-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
               Teaching & Resources
@@ -115,7 +115,7 @@ export default function Teaching() {
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 line-clamp-3">
                       {teaching.description || teaching.excerpt || "Click to read more..."}
                     </p>
-{/* 
+                   {/* 
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

@@ -355,28 +355,30 @@ export default function Home() {
       </section>
 
       {/* BOOKS SECTION - Visibility controlled */}
-      {visibility.Books && (
+      {/* {visibility.Books && (
         <section className="relative w-full mt-20 md:mt-32 pb-4 px-4">
           <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px]  bg-[#16233B] z-0"></div>
           <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
             
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 place-items-center">
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
                 {books.length > 0
                   ? books.map((book) => (
+                     <div key={book.id} className="w-full flex justify-center">
                       <img
                         key={book.id}
                         src={
-                          book.book_cover?.startsWith("http")
+                          book.book_cover?.startsWith("http") 
                             ? book.book_cover
                             : `https://api.osarenemokpae.com${book.book_cover}`
                         }
                         alt={book.title || book.post_title}
-                        className="h-32 md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+                        className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
                         onClick={() => navigate(`/books/${book.id}`)}
                         onError={(e) => {
                           e.target.src = "/book-placeholder.png";
                         }}
                       />  
+                      </div>
                     ))
                   : [1, 2, 3, 4].map((i) => (
                       <div
@@ -387,10 +389,65 @@ export default function Home() {
               </div>
             </div>
         </section>
-      )}
+      )} */}
+
+
+      {/* BOOKS SECTION - Hardcoded */}
+<section className="relative w-full mt-20 md:mt-32 px-4">
+  <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px] bg-[#16233B] z-0"></div>
+  <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
+      
+      {/* Book 1 */}
+      <div className="w-full flex justify-center">
+        <img
+          src="homebook1.png"
+          alt="Book Title 1"
+          className="h-[12.5rem] md:h-[24rem]  pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+          onClick={() => window.location.href = '/books/book1'}
+          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+        />
+      </div>
+      
+      {/* Book 2 */}
+      <div className="w-full flex justify-center">
+        <img
+          src="homebook2.png"
+          alt="Book Title 2"
+          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+          onClick={() => window.location.href = '/books/book2'}
+          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+        />
+      </div>
+      
+      {/* Book 3 */}
+      <div className="w-full flex justify-center">
+        <img
+          src="homebook3.png"
+          alt="Book Title 3"
+          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+          onClick={() => window.location.href = '/books/book3'}
+          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+        />
+      </div>
+      
+      {/* Book 4 */}
+      <div className="w-full flex justify-center">
+        <img
+          src="homebook4.png"
+          alt="Book Title 4"
+          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+          onClick={() => window.location.href = '/books/book4'}
+          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+        />
+      </div>
+      
+    </div>
+  </div>
+</section>
 
       {/* MEDIA */}
-<section className="max-w-4xl mx-auto px-4 md:px-2 mt-40 md:mt-1 pb-4 md:pb-2">
+<section className="max-w-4xl mx-auto px-4 md:px-2 mt-2 md:mt-1 pb-4 md:pb-2">
   <div className="text-center">
     <p className="text-gray-700 mb-4 font-medium">
       Click the image below to watch our teachings on YouTube

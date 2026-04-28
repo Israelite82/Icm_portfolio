@@ -3,7 +3,7 @@ export default function Research() {
     <div className="min-h-screen w-full bg-[#FFF5E1]">
       {/* RESEARCH HERO */}
       <section className="w-full bg-gradient-to-b from-[#071b34] to-[#06152b]">
-        <div className="max-w-7xl mx-auto min-h-[300px] md:h-[450px] px-4 md:px-6 py-12 mb-14 md:py-0 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto min-h-[300px] md:h-[350px] px-4 md:px-6 py-12 mb-14 md:py-0 relative overflow-hidden">
           <div className="md:mt-20 max-w-3xl relative z-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
               Research & Insight
@@ -25,7 +25,7 @@ export default function Research() {
 
       {/* Micro-Finance Banks Section */}
       <section className="w-full bg-[#FFF5E1] mb-16">
-       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+   <div className="max-w-[92%] md:max-w-6xl mx-auto px-3 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">
             Micro-Finance Banks Overcoming Adversity
           </h2>
@@ -88,8 +88,8 @@ export default function Research() {
        <hr className="border border-gray-400" />
 
       {/* Banks Do Not Fail Section */}
-      <section className="w-full bg-[#FFF5E1] mb-16 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+       <section className="w-full bg-[#FFF5E1] mt-12 mb-16">
+   <div className="max-w-[92%] md:max-w-6xl mx-auto px-3 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 text-center">
             Banks Do Not Fail, They Are Killed
           </h2>
@@ -153,8 +153,8 @@ export default function Research() {
       <hr className="border border-gray-400" />
 
       {/* Strategic Networking Section */}
-      <section className="w-full bg-[#FFF5E1] mb-16 mt-16 ">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+        <section className="w-full bg-[#FFF5E1] mt-12 mb-16">
+   <div className="max-w-[92%] md:max-w-6xl mx-auto px-3 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center">
             Strategic Networking and Leverages in Advertising Practice
           </h2>
@@ -218,8 +218,8 @@ export default function Research() {
     <hr className="border border-gray-400" />
 
       {/* Discussion of Findings Section */}
-      <section className="w-full bg-[#FFF5E1] mb-16 mt-16">
-       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+        <section className="w-full bg-[#FFF5E1] mt-12 mb-16">
+   <div className="max-w-[92%] md:max-w-6xl mx-auto px-3 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center">
             Discussion of Findings of Research into Resilience in Micro-Finance
             Banks in Lagos Nigeria
@@ -263,6 +263,12 @@ export default function Research() {
               framework as both an analytical and operational tool to enhance
               long-term resilience and sustainability.
             </p>
+
+             <div className="flex justify-center mt-auto pt-8">
+              <span className="text-gray-900 font-medium md:text-base border-2 border-gray-500 rounded-lg bg-white p-1 px-5">
+                Full Article
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -270,8 +276,8 @@ export default function Research() {
       <hr className="border border-gray-400" />
 
       {/* Conceptual Framework Section */}
-      <section className="w-full bg-[#FFF5E1] pb-12 mt-16">
-       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+       <section className="w-full bg-[#FFF5E1] pb-16 mt-12">
+   <div className="max-w-[92%] md:max-w-6xl mx-auto px-3 md:px-6 py-8 md:py-8 rounded-3xl border-t border-l border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
             A Conceptual Framework for Researching Micro-Finance Organisational
             Resilience in Nigeria
@@ -321,6 +327,12 @@ export default function Research() {
               foundations, methodological choices, and practical industry
               insights in a unified framework.
             </p>
+
+             <div className="flex justify-center mt-auto pt-8">
+              <span className="text-gray-900 font-medium md:text-base border-2 border-gray-500 rounded-lg bg-white p-1 px-5">
+                Full Article
+              </span>
+            </div>
           </div>
         </div>
       </section>
