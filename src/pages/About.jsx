@@ -17,24 +17,20 @@ export default function About() {
           // Hero section
           hero_headline: data.hero_section?.headline || "",
           hero_subtext: data.hero_section?.subtext || "",
-          hero_background_image: data.hero_section?.background_image_path
-            ? `https://api.osarenemokpae.com/storage/${data.hero_section.background_image_path}`
-            : null,
+          hero_background_image: data.hero_section?.background_image_path || null,
 
           // Brand story
-          brand_story: data.brand_story.brand_story || "",
+          brand_story: data.brand_story?.brand_story || "",
 
           // Academic biography
-          academic_biography: data.brand_story.academic_biography || "",
+          academic_biography: data.brand_story?.academic_biography || "",
 
           // Apostle biography
-          apostle_content: data.brand_story.apostle_biography || "",
+          apostle_content: data.brand_story?.apostle_biography || "",
 
           // Apostle name and image
-          apostle_name: data.brand_story.apostle.name || "",
-          apostle_image: data.brand_story.apostle.image
-            ? `https://api.osarenemokpae.com/storage/${data.brand_story.apostle.image}`
-            : null,
+          apostle_name: data.brand_story?.apostle?.name || "",
+          apostle_image: data.brand_story?.apostle?.image || null,
 
           // Missions
           mission_statement_1: data.missions?.mission_statement_1 || "",
@@ -43,7 +39,25 @@ export default function About() {
           track_record_title: data.missions?.track_record?.title || "",
           track_record_content: data.missions?.track_record?.description || "",
 
-          // Social media links - ADD THESE TWO LINES
+          // NEW: Academic Profile
+          phd_degrees: data.academic_profile?.phd_degrees || [],
+          post_doctoral_degrees: data.academic_profile?.post_doctoral_degrees || [],
+          location: data.academic_profile?.location || "",
+          email: data.academic_profile?.email || "",
+
+          // NEW: Education
+          education: data.education || [],
+
+          // NEW: Passion
+          passion: data.passion || "",
+
+          // NEW: Additional Text
+          additional_text: data.additional_text || [],
+
+          // NEW: Top Skills
+          top_skills: data.top_skills || [],
+
+          // Social media links
           youtube_link: data.youtube_link || "",
           linkedin_link: data.linkedin_link || "",
         };
@@ -82,7 +96,6 @@ export default function About() {
           {/* Left: Text with border */}
           <div className="w-full lg:w-1/2">
             <div className="border border-gray-600 h-full p-6 md:p-16 flex flex-col justify-center">
-              {/* Headline - H1 and first paragraph */}
               <h1 className="text-3xl md:text-3xl font-bold mb-2 text-gray-900">
                 {aboutData.hero_headline || "Dr. Osaren Emokpae"}
               </h1>
@@ -91,7 +104,6 @@ export default function About() {
                   "A Development Economist"}
               </p>
 
-              {/* Subtitle - remaining paragraphs */}
               {aboutData.hero_subtext && (
                 <div className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
                   {aboutData.hero_subtext.split("\n").slice(1).join("\n")}
@@ -154,81 +166,67 @@ export default function About() {
               </div>
             </div>
 
-            {/* Right Column: Academic Profile Box - Static for now */}
+            {/* Right Column: Academic Profile Box - NOW DYNAMIC */}
             <div>
               <div className="p-10">
                 <h3 className="text-xl text-gray-800 md:text-2xl font-bold mb-6">
                   Academic Profile
                 </h3>
+                
+                {/* PhD Degrees - Dynamic */}
                 <div className="space-y-4 mb-8">
-                  <div className="flex items-start gap-3">
-                    <img src="Frame.png" alt="" />
-                    <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Ph.D in Political Economic Management
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        University of Century
-                      </p>
+                  {aboutData.phd_degrees.map((degree, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <img src="Frame.png" alt="" />
+                      <div>
+                        <p className="text-gray-400 text-sm mb-2">
+                          {degree.title}
+                        </p>
+                        <p className="text-sm md:text-base font-semibold text-gray-600">
+                          {degree.institution}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <img src="Frame.png" alt="" />
-                    <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Ph.D in Organisational Resilience in Microfinance
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        University of Hertfordshire
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
+                
+                {/* Post Doctoral Degrees - Dynamic */}
                 <h4 className="text-lg md:text-xl text-gray-600 font-bold mb-4 mt-12">
                   Post Doctoral Degrees
                 </h4>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <img src="Frame1.png" alt="" />
-                    <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Business Diversification
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        Oxford University
-                      </p>
+                  {aboutData.post_doctoral_degrees.map((degree, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <img src="Frame1.png" alt="" />
+                      <div>
+                        <p className="text-gray-400 text-sm mb-2">
+                          {degree.title}
+                        </p>
+                        <p className="text-sm md:text-base font-semibold text-gray-600">
+                          {degree.institution}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <img src="Frame1.png" alt="" />
-                    <div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        Resilience of SMEs
-                      </p>
-                      <p className="text-sm md:text-base font-semibold text-gray-600">
-                        Cranfield University
-                      </p>
-                    </div>
-                  </div>
+                  ))}
+                  
+                  {/* Location - Dynamic */}
                   <div className="flex items-start gap-3">
                     <img src="location.png" alt="" className="mt-1"/>
                     <div>
-                      <p className="text-gray-400 text-md">
-                        Location
-                      </p>
+                      <p className="text-gray-400 text-md">Location</p>
                       <p className="text-sm md:text-base font-semibold text-gray-600">
-                        The Summit, Autumn Glen, Columbia, U.S.A
+                        {aboutData.location}
                       </p>
                     </div>
                   </div>
+                  
+                  {/* Email - Dynamic */}
                   <div className="flex items-start gap-3">
                     <img src="mail.png" alt="" className="mt-2" />
                     <div>
-                      <p className="text-gray-400 text-md ">
-                        Email
-                      </p>
+                      <p className="text-gray-400 text-md">Email</p>
                       <p className="text-sm md:text-base font-semibold text-gray-600">
-                      osaremokpae@yahoo.com
+                        {aboutData.email}
                       </p>
                     </div>
                   </div>
@@ -264,37 +262,26 @@ export default function About() {
                   )}
                 </div>
                 <hr className="border-gray-600 mt-20" />
-                {/* Education Section - Static */}
+                
+                {/* Education Section - NOW DYNAMIC */}
                 <div className="mt-8">
                   <h3 className="font-bold text-gray-800 text-xl mb-4 flex items-center gap-2">
                     Education
                   </h3>
                   <div className="space-y-5 text-sm text-gray-800">
-                    <div className="flex items-start gap-3">
-                      <img src="Frame-book.png" alt="" />
-                      <div>
-                        <p className="text-gray-500 text-sm mb-1">
-                          Christian Leadership
-                        </p>
-                        <p className="text-sm md:text-base font-semibold text-gray-600">
-                          Haggai Institute Hawaii, U.S.A
-                        </p>
+                    {aboutData.education.map((edu, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <img src="Frame-book.png" alt="" />
+                        <div>
+                          <p className="text-gray-500 text-sm mb-1">
+                            {edu.title}
+                          </p>
+                          <p className="text-sm md:text-base font-semibold text-gray-600">
+                            {edu.institution}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <img src="Frame-book.png" alt="" />
-                      <div>
-                        <p className="text-gray-500 text-sm mb-1">
-                          Christian Leadership
-                        </p>
-                        <p className="text-sm md:text-base font-semibold text-gray-600">
-                          British Foursquare Seminary,
-                        </p>
-                        <span className="text-sm md:text-base font-semibold text-gray-600">
-                          Hastings
-                        </span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -310,10 +297,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
                   <a
-                    href={
-                      aboutData?.youtube_link ||
-                      "https://www.youtube.com/@theanchor1079"
-                    }
+                    href={aboutData.youtube_link || "https://www.youtube.com/@theanchor1079"}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -325,10 +309,7 @@ export default function About() {
                   </a>
 
                   <a
-                    href={
-                      aboutData?.linkedin_link ||
-                      "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"
-                    }
+                    href={aboutData.linkedin_link || "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -340,13 +321,15 @@ export default function About() {
                   </a>
                 </div>
                 <hr className="border-gray-500" />
+                
+                {/* Passion Section - NOW DYNAMIC */}
                 <div className="bg-white border-l-8 border-t-8 border-gray-600 rounded-3xl p-6">
                   <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-3">
                     <img src="fire.png" alt="" />
                     Passion
                   </h3>
                   <p className="text-gray-700">
-                    Monitoring the next generation of leaders
+                    {aboutData.passion || "Monitoring the next generation of leaders"}
                   </p>
                 </div>
                 <hr className="border-gray-500" />
@@ -356,16 +339,16 @@ export default function About() {
         </div>
       </section>
 
-      {/* MISSIONS SECTION - Three boxes */}
+      {/* MISSIONS SECTION */}
       <section className="w-full bg-white py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl text-gray-900 font-bold">
             Mission
           </h2>
           <div className="border-b-4 border-red-700 w-16 mt-4"></div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-start"> */}
-          {/* First Box - Mission Statement 1 */}
-          <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0 border-gray-400  shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+          
+          {/* Mission Statement 1 */}
+          <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0 border-gray-400 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
             {aboutData.mission_statement_1 ? (
               <div
                 className="text-gray-800"
@@ -374,66 +357,16 @@ export default function About() {
                 }}
               />
             ) : (
-              <>
-                <p className="text-md text-gray-800 leading-relaxed">
-                  A National Leader/General Overseer Emeritus of Foursquare
-                  Gospel Church Trinidad & Tobago and Guyana, Executive
-                  Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
-                  serves as the President and Presiding Apostle of Macedonia
-                  Call Global Assembly—a ministry with a powerful global vision.
-                </p>
-              </>
+              <p className="text-md text-gray-800 leading-relaxed">
+                A National Leader/General Overseer Emeritus of Foursquare
+                Gospel Church Trinidad & Tobago and Guyana, Executive
+                Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
+                serves as the President and Presiding Apostle of Macedonia
+                Call Global Assembly—a ministry with a powerful global vision.
+              </p>
             )}
           </div>
-
-          {/* Second Box - Mission Statement 2 */}
-          {/* <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6">
-              {aboutData.mission_statement_2 ? (
-                <div
-                  className="text-gray-800"
-                  dangerouslySetInnerHTML={{
-                    __html: aboutData.mission_statement_2,
-                  }}
-                />
-              ) : (
-                <>
-                  <p className="text-md text-gray-800 leading-relaxed">
-                    The vision for Macedonia Call Global Assembly was birthed in
-                    his heart in 2008 while in Brixton, United Kingdom, within
-                    the Foursquare movement, and was later incorporated at The
-                    Summit in Columbia, USA. What began as a divine revelation
-                    has since grown into an independent global ministry
-                    committed to accelerating the discipling of nations in
-                    preparation for the return of our Savior.
-                  </p>
-                </>
-              )}
-            </div> */}
-
-          {/* Third Box - mission statement 3 */}
-          {/* <div className="bg-[#FFF5E1] border-r-8 border-b-8 border-gray-400 rounded-xl p-6 break-words overflow-hidden">
-              {aboutData.mission_statement_3 ? (
-                <div
-                  className="text-gray-800 break-words"
-                  dangerouslySetInnerHTML={{
-                    __html: aboutData.mission_statement_3,
-                  }}
-                />
-              ) : (
-                <p className="text-md text-gray-800 leading-relaxed break-words">
-                  Under his pastoral leadership, he and his team planted
-                  thirteen churches within the Foursquare movement in Nigeria,
-                  three in United Kingdom, one in Dominican Republic, one in
-                  Guyana and one in the USA. Among the Foursquare churches he
-                  planted in Nigeria is the Foursquare Grand Assembly, a
-                  remarkable congregation made up of three dynamic expressions:
-                  the Youth Church, the Church for Street Urchins, and the Main
-                  Church.
-                </p>
-              )}
-            </div> */}
         </div>
-        {/* </div> */}
       </section>
 
       {/* TRACK RECORD SECTION */}
@@ -463,58 +396,17 @@ export default function About() {
         </div>
       </section>
 
+      {/* ADDITIONAL TEXT SECTION - NOW DYNAMIC */}
       <section className="w-full py-12 md:py-13 -mt-8">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="bg-[#FFF5E1] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 items-start max-w-6xl mx-auto px-4 md:px-8">
-            {/* Left - Text */}
+            {/* Left - Text - Dynamic */}
             <div className="space-y-2 mt-10">
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                Dr Osaren Emokpae was as an adjunct professor in University of
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                Lagos in 1995 teaching MSc and MBAs in Organisational{" "}
-              </p>
-
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                behaviour and Marketing. He was a lecturer on Marketing in{" "}
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                Unilever and UAC training Schools in Apapa and Ikoyi.
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                He also lectured on Digital Divide in Rhodes university
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                South Africa in 2000; as well as teaching Strategic Planning
-                in{" "}
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                Foursquare Institute of Leadership and Futures studies for many
-                years.
-              </p>
-              <br />
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                He was a regular Resource Person teaching in ARCON and{" "}
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                Institute of Marketing Programs. He taught on Career choice in
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                Young Enterprise United Kingdom and he is currently the{" "}
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                Chairman of NOPSI (Nigerian Oversees Prisoners Support
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
-                {" "}
-                Initiative) headquartered in the United Kingdom.
-              </p>
+              {aboutData.additional_text.map((line, index) => (
+                <p key={index} className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                  {line.text || line}
+                </p>
+              ))}
             </div>
 
             {/* Right - Image */}
@@ -530,43 +422,21 @@ export default function About() {
       </section>
       <hr className="border-red-900" />
 
-      {/* TOP SKILLS SECTION - Static */}
+      {/* TOP SKILLS SECTION - NOW DYNAMIC */}
       <section className="w-full bg-white py-12 md:py-14">
         <div className="max-w-6xl mx-auto px-4 md:px-4">
           <h2 className="text-2xl md:text-3xl text-gray-800 font-bold mb-8">
             Top Skills
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4 bg-[#FFF5E1] rounded-2xl rounded-r-full rounded-l-none p-2">
-            <div className="flex items-center gap-2">
-              <img src="monitoring.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">
-                Mentoring
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <img src="organize.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">
-                Organizational Leadership
-              </p>
-            </div>
-            <div className="flex items-center gap-2 pt-16">
-              <img src="managing.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">
-                Managing Organizational Performance
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <img src="planning.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">
-                Strategic Planning
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <img src="economic.png" alt="" />
-              <p className="font-semibold text-base md:text-md text-gray-700">
-                Economic Development
-              </p>
-            </div>
+            {aboutData.top_skills.map((skill, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <img src={skill.icon} alt="" />
+                <p className="font-semibold text-base md:text-md text-gray-700">
+                  {skill.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

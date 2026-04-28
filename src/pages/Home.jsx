@@ -10,13 +10,25 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [books, setBooks] = useState([]);
   const [blogPosts, setBlogPosts] = useState([]);
-
-  // State for homepage settings from admin
-  const [form, setForm] = useState({
-    headline: "",
+  
+  // State for dynamic content from API
+  const [slides, setSlides] = useState([]);
+  const [heroSlideData, setHeroSlideData] = useState({
+    headline: "Welcome",
     subtext: "",
+    background_image: null
   });
-  const [heroImage, setHeroImage] = useState(null);
+  const [biography, setBiography] = useState({
+    image: "/second-Img.png",
+    content: "Dr. Osaren Philips Emokpae is an Erudite Scholar, Global Apostle, Serial Investor, Management & Marketing Consultant, and unceasing philanthropist. He is also a Development Economist, Theologian, and expert in organisational leadership, production management, strategic planning, managing organisational performance, and microfinance banking. He is the author of The Great Expectation, Minimum to Maximum.He also co-authored Guilty or Not Guilty and The Glory in stewardship."
+  });
+  const [media, setMedia] = useState({
+    title: "Click the image below to watch our teachings on YouTube",
+    youtube_url: "https://www.youtube.com/@theanchor1079",
+    button_text: "YouTube Channel",
+    background_color: "#dc2626",
+    icon_color: "#ffffff"
+  });
   const [visibility, setVisibility] = useState({
     Hero: true,
     Teaching: true,
@@ -24,94 +36,179 @@ export default function Home() {
     Books: true,
   });
 
-  useEffect(() => {
-    // Fetch homepage settings from admin API
-    axios
-      .get(`${API_URL}/homepage`)
-      .then((res) => {
-        const homepageData = res.data.data || res.data;
-        console.log("Homepage data:", homepageData);
+  
 
-        // --- CRITICAL CHANGE: Only fetch data for the SECOND slide ---
-        if (homepageData.hero) {
-          // This data is ONLY for the second slide
-          setForm({
-            headline: homepageData.hero.headline || "Welcome",
-            subtext: homepageData.hero.subtext || "",
-          });
-
-          if (homepageData.hero.background_image) {
-            setHeroImage(homepageData.hero.background_image);
+  const fetchHomepageData = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/homepage`);
+      const data = response.data.data || response.data;
+      console.log("Homepage data:", data);
+      
+      // Update hero slide data (slide 2)
+      if (data.hero) {
+        setHeroSlideData({
+          headline: data.hero.headline || "Welcome",
+          subtext: data.hero.subtext || "",
+          background_image: data.hero.background_image
+        });
+      }
+      
+      // Update all slides from API
+      if (data.slides && data.slides.length === 4) {
+        const formattedSlides = data.slides.map(slide => ({
+          id: slide.id,
+          image: slide.image,
+          title: slide.title,
+          subtitle: slide.subtitle,
+          hasText: slide.has_text,
+          button_text: slide.button_text,
+          button_link: slide.button_link
+        }));
+        setSlides(formattedSlides);
+      } else {
+        // Fallback to default slides if API doesn't return them
+        setSlides([
+          {
+            id: null,
+            image: "/bioImg.png",
+            title: "Dr. Osaren Emokpae",
+            subtitle: "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
+            hasText: true,
+            button_text: "Read Full Bio",
+            button_link: "/about"
+          },
+          {
+            id: null,
+            image: heroSlideData.background_image || "/slide2.png",
+            title: heroSlideData.headline,
+            subtitle: heroSlideData.subtext,
+            hasText: true,
+            button_text: "Read Full Bio",
+            button_link: "/about"
+          },
+          {
+            id: null,
+            image: "/slide3.png",
+            title: null,
+            subtitle: null,
+            hasText: false,
+            button_text: null,
+            button_link: null
+          },
+          {
+            id: null,
+            image: "/slide4.png",
+            title: null,
+            subtitle: null,
+            hasText: false,
+            button_text: null,
+            button_link: null
           }
+        ]);
+      }
+      
+      // Update biography section
+      if (data.biography) {
+        setBiography({
+          image: data.biography.image || "/second-Img.png",
+          content: data.biography.content || biography.content
+        });
+      }
+      
+      // Update media section
+      if (data.media) {
+        setMedia({
+          title: data.media.title || "Click the image below to watch our teachings on YouTube",
+          youtube_url: data.media.youtube_url || "https://www.youtube.com/@theanchor1079",
+          button_text: data.media.button_text || "YouTube Channel",
+          background_color: data.media.background_color || "#dc2626",
+          icon_color: data.media.icon_color || "#ffffff"
+        });
+      }
+      
+      // Visibility from sections (if needed)
+      if (data.sections && typeof data.sections === "object") {
+        const sectionNames = Object.values(data.sections).map(
+          (section) => section.name
+        );
+        setVisibility({
+          Hero: sectionNames.includes("Hero"),
+          Teaching: sectionNames.includes("Featured teaching"),
+          Blog: sectionNames.includes("Featured blog"),
+          Books: sectionNames.includes("Featured book"),
+        });
+      }
+      
+    } catch (error) {
+      console.error("Error fetching homepage data:", error);
+      // Fallback to default slides if API fails
+      setSlides([
+        {
+          id: null,
+          image: "/bioImg.png",
+          title: "Dr. Osaren Emokpae",
+          subtitle: "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
+          hasText: true,
+          button_text: "Read Full Bio",
+          button_link: "/about"
+        },
+        {
+          id: null,
+          image: "/slide2.png",
+          title: "Welcome",
+          subtitle: "",
+          hasText: true,
+          button_text: "Read Full Bio",
+          button_link: "/about"
+        },
+        {
+          id: null,
+          image: "/slide3.png",
+          title: null,
+          subtitle: null,
+          hasText: false,
+          button_text: null,
+          button_link: null
+        },
+        {
+          id: null,
+          image: "/slide4.png",
+          title: null,
+          subtitle: null,
+          hasText: false,
+          button_text: null,
+          button_link: null
         }
+      ]);
+    }
+  };
 
-        // Visibility from sections object
-        if (homepageData.sections && typeof homepageData.sections === "object") {
-          const sectionNames = Object.values(homepageData.sections).map(
-            (section) => section.name
-          );
+  const fetchBooks = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/books`);
+      const booksData = response.data.data?.data || response.data.data || response.data;
+      setBooks(Array.isArray(booksData) ? booksData.slice(0, 4) : []);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+  };
 
-          setVisibility({
-            Hero: sectionNames.includes("Hero"),
-            Teaching: sectionNames.includes("Featured teaching"),
-            Blog: sectionNames.includes("Featured blog"),
-            Books: sectionNames.includes("Featured book"),
-          });
-        }
-      })
-      .catch((err) => console.error("Error fetching homepage settings:", err));
-
-    // Fetch books
-    axios
-      .get(`${API_URL}/books`)
-      .then((res) => {
-        const booksData = res.data.data?.data || res.data.data || res.data;
-        setBooks(Array.isArray(booksData) ? booksData.slice(0, 4) : []);
-      })
-      .catch((err) => console.error("Error fetching books:", err));
-
-    // Fetch blog posts
-    axios
-      .get(`${API_URL}/blog-posts`)
-      .then((res) => {
-        const blogData = res.data.data || [];
-        setBlogPosts(Array.isArray(blogData) ? blogData.slice(0, 3) : []);
-      })
-      .catch((err) => console.error("Error fetching blog posts:", err));
-  }, []);
-
-  // --- CRITICAL CHANGE: Slides are now separate: First Slide (Hardcoded), Second Slide (Dynamic) ---
-  const slides = [
-    {
-      // SLIDE 1: PERFECTLY HARDCODED - Will NEVER change
-      image: "/bioImg.png",
-      title: "Dr. Osaren Emokpae",
-      subtitle:
-        "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
-      hasText: true,
-    },
-    {
-       image: heroImage || "/slide2.png",
-    title: form.headline || "Welcome",
-    subtitle: form.subtext || "",
-    hasText: true,
-    },
-    {
-      image: "/slide3.png",
-      hasText: false,
-    },
-    {
-      image: "/slide4.png",
-      hasText: false,
-    },
-  ];
+  const fetchBlogPosts = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/blog-posts`);
+      const blogData = response.data.data || [];
+      setBlogPosts(Array.isArray(blogData) ? blogData.slice(0, 3) : []);
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+    }
+  };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % 4);
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + 4) % 4);
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   const goToSlide = (index) => {
@@ -121,6 +218,24 @@ export default function Home() {
   const handleReadMore = (id) => {
     navigate(`/blog/${id}`);
   };
+
+  useEffect(() => {
+    fetchHomepageData();
+    fetchBooks();
+    fetchBlogPosts();
+  }, []);
+
+  // Don't render until slides are loaded
+  if (slides.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#0b1227] flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -155,23 +270,23 @@ export default function Home() {
 
         <ul className="hidden md:flex gap-10 text-sm text-gray-300 ml-auto mr-20">
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/about" className="text-gray-300 hover:text-[-[#473be9]">About</Link>
+            <Link to="/about" className="text-gray-300 hover:text-[#473be9]">About</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/research" className="text-gray-300 hover:text-[-[#473be9]">Research</Link>
+            <Link to="/research" className="text-gray-300 hover:text-[#473be9]">Research</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/blog" className="text-gray-300 hover:text-[-[#473be9]">Blog</Link>
+            <Link to="/blog" className="text-gray-300 hover:text-[#473be9]">Blog</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/books" className="text-gray-300 hover:text-[-[#473be9]">Books</Link>
+            <Link to="/books" className="text-gray-300 hover:text-[#473be9]">Books</Link>
           </li>
           <li className="hover:text-[#F2E8D5] cursor-pointer">
-            <Link to="/teaching" className="text-gray-300 hover:text-[-[#473be9]">Teaching</Link>
+            <Link to="/teaching" className="text-gray-300 hover:text-[#473be9]">Teaching</Link>
           </li>
         </ul>
 
-       <a href="https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/" target="_blank" rel="noopener noreferrer">
           <img src="linkedin-white.png" alt="LinkedIn" className="mr-10 hover:scale-125 transition-transform duration-300" />
         </a>
 
@@ -233,7 +348,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO CARD */}
+      {/* HERO CAROUSEL */}
       <section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-10 overflow-hidden">
         {/* Wine curved backgrounds - Hidden on mobile */}
         <div
@@ -258,45 +373,50 @@ export default function Home() {
               className="flex h-full transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-            {slides.map((slide, index) => (
-  <div key={index} className="min-w-full h-full">
-    {slide.hasText ? (
-      // Slides WITH text (Slide 1 and 2)
-      <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
-    <img
-  src={slide.image}
-  alt="Biography"
-  className={`w-full ${index === 1 ? 'h-96' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
-/>
-       <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
-            {slide.title}
-          </h1>
-          <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
-            {slide.subtitle}
-          </p>
-          <button
-            onClick={() => navigate("/about")}
-            className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
-          >
-            Read Full Bio
-          </button>
-        </div>
-      </div>
-    ) : (
-      
-      <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
-        <img
-          src={slide.image}
-          alt="Slide"
-          className="w-full h-96 object-cover"
-        />
-        {/* Empty div with same height as text section on mobile */}
-        <div className="h-[240px] md:hidden"></div>
-      </div>
-    )}
-  </div>
-))}
+              {slides.map((slide, index) => (
+                <div key={index} className="min-w-full h-full">
+                  {slide.hasText ? (
+                    // Slides WITH text
+                    <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
+                      <img
+                        src={slide.image}
+                        alt="Slide"
+                        className={`w-full ${index === 1 ? 'h-96' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
+                        onError={(e) => {
+                          e.target.src = index === 0 ? "/bioImg.png" : "/slide2.png";
+                        }}
+                      />
+                      <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
+                          {slide.title}
+                        </h1>
+                        <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
+                          {slide.subtitle}
+                        </p>
+                        <button
+                          onClick={() => navigate(slide.button_link || "/about")}
+                          className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
+                        >
+                          {slide.button_text || "Read Full Bio"}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    // Slides WITHOUT text
+                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
+                      <img
+                        src={slide.image}
+                        alt="Slide"
+                        className="w-full h-96 object-cover"
+                        onError={(e) => {
+                          e.target.src = `/slide${index + 1}.png`;
+                        }}
+                      />
+                      <div className="h-[240px] md:hidden"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -333,152 +453,110 @@ export default function Home() {
         ))}
       </div>
 
-      {/* BIOGRAPHY CARD */}
+      {/* BIOGRAPHY CARD - Dynamic from API */}
       <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-20">
         <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-6 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
           <img
-            src="/second-Img.png"
+            src={biography.image}
             alt="Biography"
             className="w-full h-65 md:h-[24rem] object-cover rounded-xl"
+            onError={(e) => {
+              e.target.src = "/second-Img.png";
+            }}
           />
           <p className="text-sm md:text-base leading-relaxed md:mt-14">
-            Dr. Osaren Philips Emokpae is an Erudite Scholar, Global Apostle,
-            Serial Investor, Management & Marketing Consultant, and unceasing
-            philanthropist. He is also a Development Economist, Theologian, and
-            expert in organisational leadership, production management,
-            strategic planning, managing organisational performance, and
-            microfinance banking. He is the author of The Great Expectation,
-            Minimum to Maximum.He also co-authored Guilty or Not Guilty and The
-            Glory in stewardship.
+            {biography.content}
           </p>
         </div>
       </section>
 
-      {/* BOOKS SECTION - Visibility controlled */}
-      {/* {visibility.Books && (
-        <section className="relative w-full mt-20 md:mt-32 pb-4 px-4">
-          <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px]  bg-[#16233B] z-0"></div>
-          <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
-            
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
-                {books.length > 0
-                  ? books.map((book) => (
-                     <div key={book.id} className="w-full flex justify-center">
-                      <img
-                        key={book.id}
-                        src={
-                          book.book_cover?.startsWith("http") 
-                            ? book.book_cover
-                            : `https://api.osarenemokpae.com${book.book_cover}`
-                        }
-                        alt={book.title || book.post_title}
-                        className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                        onClick={() => navigate(`/books/${book.id}`)}
-                        onError={(e) => {
-                          e.target.src = "/book-placeholder.png";
-                        }}
-                      />  
-                      </div>
-                    ))
-                  : [1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="h-32 md:h-[13rem] w-24 md:w-32 bg-gray-200 rounded animate-pulse"
-                      ></div>
-                    ))}
-              </div>
+      {/* BOOKS SECTION - Hardcoded images for now */}
+      <section className="relative w-full mt-20 md:mt-32 px-4">
+        <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px] bg-[#16233B] z-0"></div>
+        <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
+            {/* Book 1 */}
+            <div className="w-full flex justify-center">
+              <img
+                src="homebook1.png"
+                alt="Book Title 1"
+                className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+                onClick={() => navigate('/books/book1')}
+                onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+              />
             </div>
-        </section>
-      )} */}
+            
+            {/* Book 2 */}
+            <div className="w-full flex justify-center">
+              <img
+                src="homebook2.png"
+                alt="Book Title 2"
+                className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+                onClick={() => navigate('/books/book2')}
+                onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+              />
+            </div>
+            
+            {/* Book 3 */}
+            <div className="w-full flex justify-center">
+              <img
+                src="homebook3.png"
+                alt="Book Title 3"
+                className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+                onClick={() => navigate('/books/book3')}
+                onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+              />
+            </div>
+            
+            {/* Book 4 */}
+            <div className="w-full flex justify-center">
+              <img
+                src="homebook4.png"
+                alt="Book Title 4"
+                className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
+                onClick={() => navigate('/books/book4')}
+                onError={(e) => { e.target.src = "/book-placeholder.png"; }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* MEDIA SECTION - Dynamic from API */}
+      <section className="max-w-4xl mx-auto px-4 md:px-2 mt-2 md:mt-1 pb-4 md:pb-2">
+        <div className="text-center">
+          <p className="text-gray-700 mb-4 font-medium">
+            {media.title}
+          </p>
+          <a
+            href={media.youtube_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block transition-transform hover:scale-105 duration-300"
+          >
+            <div 
+              className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              style={{ backgroundColor: media.background_color }}
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill={media.icon_color} 
+                className="w-32 h-10 md:w-40 md:h-10 mx-auto"
+              >
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM10 16.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+              <p className="text-white text-sm font-semibold mt-3">{media.button_text}</p>
+            </div>
+          </a>
+        </div>
+      </section>    
 
-      {/* BOOKS SECTION - Hardcoded */}
-<section className="relative w-full mt-20 md:mt-32 px-4">
-  <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px] bg-[#16233B] z-0"></div>
-  <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
-      
-      {/* Book 1 */}
-      <div className="w-full flex justify-center">
-        <img
-          src="homebook1.png"
-          alt="Book Title 1"
-          className="h-[12.5rem] md:h-[24rem]  pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-          onClick={() => window.location.href = '/books/book1'}
-          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
-        />
-      </div>
-      
-      {/* Book 2 */}
-      <div className="w-full flex justify-center">
-        <img
-          src="homebook2.png"
-          alt="Book Title 2"
-          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-          onClick={() => window.location.href = '/books/book2'}
-          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
-        />
-      </div>
-      
-      {/* Book 3 */}
-      <div className="w-full flex justify-center">
-        <img
-          src="homebook3.png"
-          alt="Book Title 3"
-          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-          onClick={() => window.location.href = '/books/book3'}
-          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
-        />
-      </div>
-      
-      {/* Book 4 */}
-      <div className="w-full flex justify-center">
-        <img
-          src="homebook4.png"
-          alt="Book Title 4"
-          className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-          onClick={() => window.location.href = '/books/book4'}
-          onError={(e) => { e.target.src = "/book-placeholder.png"; }}
-        />
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-      {/* MEDIA */}
-<section className="max-w-4xl mx-auto px-4 md:px-2 mt-2 md:mt-1 pb-4 md:pb-2">
-  <div className="text-center">
-    <p className="text-gray-700 mb-4 font-medium">
-      Click the image below to watch our teachings on YouTube
-    </p>
-    <a
-      href="https://www.youtube.com/@theanchor1079"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-block transition-transform hover:scale-105 duration-300"
-    >
-      <div className="bg-red-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          fill="white" 
-          className="w-32 h-10 md:w-40 md:h-10"
-        >
-          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM10 16.5v-9l6 4.5-6 4.5z"/>
-        </svg>
-        <p className="text-white text-sm font-semibold mt-3">YouTube Channel</p>
-      </div>
-    </a>
-  </div>
-</section>    
-       
-
-      {/* MESSAGE CARDS (BLOG SECTION) - Visibility controlled */}
+      {/* BLOG SECTION */}
       {visibility.Blog && (
         <section className="relative max-w-7xl mx-auto px-4 md:px-12 mt-20 md:mt-18">
           <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[76rem] rounded-md -top-10 h-auto md:h-[320px] bg-[#16233B] z-0"></div>
-          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-1 ">
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-1">
             {blogPosts.length > 0
               ? blogPosts.map((post) => (
                   <div
@@ -514,8 +592,6 @@ export default function Home() {
           </div>
         </section>
       )}
-
-     
     </>
   );
 }
