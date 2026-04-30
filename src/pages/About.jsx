@@ -99,13 +99,13 @@ export default function About() {
               <h1 className="text-3xl md:text-3xl font-bold mb-2 text-gray-900">
                 {aboutData.hero_headline || "Dr. Osaren Emokpae"}
               </h1>
-              <p className="text-xl md:text-md font-semibold text-gray-500 mb-6">
+              <p className="text-xl md:text-md font-semibold text-gray-500 mb-6 text-justify">
                 {aboutData.hero_subtext?.split("\n")[0] ||
                   "A Development Economist"}
               </p>
 
               {aboutData.hero_subtext && (
-                <div className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
+                <div className="text-gray-600 leading-relaxed text-sm md:text-base text-justify whitespace-pre-line">
                   {aboutData.hero_subtext.split("\n").slice(1).join("\n")}
                 </div>
               )}
@@ -136,15 +136,16 @@ export default function About() {
                 </h2>
                 <div className="border-b-4 border-red-700 w-24 mt-4"></div>
               </div>
-              <div className="mt-6 space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
+              <div className="mt-6 space-y-4 text-gray-800 text-sm md:text-base leading-relaxed text-justify">
                 {aboutData.academic_biography ? (
                   <div
+                    className="text-justify"
                     dangerouslySetInnerHTML={{
                       __html: aboutData.academic_biography,
                     }}
                   />
                 ) : (
-                  <p>Dr. Osaren Emokpae is a world renowned authority...</p>
+                  <p className="text-justify">Dr. Osaren Emokpae is a world renowned authority...</p>
                 )}
               </div>
 
@@ -216,8 +217,6 @@ export default function About() {
                       </div>
                     </div>
                   ))}
-                  
-                 
                 </div>
               </div>
             </div>
@@ -235,17 +234,18 @@ export default function About() {
                 <h2 className="text-2xl md:text-3xl text-gray-800 font-bold mb-10">
                   {aboutData.apostle_name || "Apostle. Osaren Emokpae"}
                 </h2>
-                <div className="space-y-6 text-gray-800 text-md md:text-base leading-relaxed">
+                <div className="space-y-6 text-gray-800 text-md md:text-base leading-relaxed text-justify">
                   {aboutData.apostle_content ? (
                     <div
+                      className="text-justify"
                       dangerouslySetInnerHTML={{
                         __html: aboutData.apostle_content,
                       }}
                     />
                   ) : (
                     <>
-                      <p>National Leader/General Overseer Emeritus...</p>
-                      <p>The vision for Macedonia Call Global Assembly...</p>
+                      <p className="text-justify">National Leader/General Overseer Emeritus...</p>
+                      <p className="text-justify">The vision for Macedonia Call Global Assembly...</p>
                     </>
                   )}
                 </div>
@@ -316,7 +316,7 @@ export default function About() {
                     <img src="fire.png" alt="" />
                     Passion
                   </h3>
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 text-justify">
                     {aboutData.passion || "Monitoring the next generation of leaders"}
                   </p>
                 </div>
@@ -339,13 +339,13 @@ export default function About() {
           <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0 border-gray-400 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
             {aboutData.mission_statement_1 ? (
               <div
-                className="text-gray-800"
+                className="text-gray-800 text-justify"
                 dangerouslySetInnerHTML={{
                   __html: aboutData.mission_statement_1,
                 }}
               />
             ) : (
-              <p className="text-md text-gray-800 leading-relaxed">
+              <p className="text-md text-gray-800 leading-relaxed text-justify">
                 A National Leader/General Overseer Emeritus of Foursquare
                 Gospel Church Trinidad & Tobago and Guyana, Executive
                 Counsellor Emeritus of Foursquare Nigeria, Dr. Emokpae now
@@ -366,18 +366,19 @@ export default function About() {
           </h2>
           <div className="border-b-4 border-red-800 w-36 mt-4"></div>
           <div
-            className="bg-white rounded-2xl p-8 md:p-12 mt-8 border "
+            className="bg-white rounded-2xl p-8 md:p-12 mt-8 border"
             style={{ borderBottom: "none", borderRight: "none" }}
           >
-            <div className="space-y-5 text-gray-900 text-sm md:text-base leading-relaxed">
+            <div className="space-y-5 text-gray-900 text-sm md:text-base leading-relaxed text-justify">
               {aboutData.track_record_content ? (
                 <div
+                  className="text-justify"
                   dangerouslySetInnerHTML={{
                     __html: aboutData.track_record_content,
                   }}
                 />
               ) : (
-                <p>Dr. Osaren Emokpae is a transformational force...</p>
+                <p className="text-justify">Dr. Osaren Emokpae is a transformational force...</p>
               )}
             </div>
           </div>
@@ -391,7 +392,7 @@ export default function About() {
             {/* Left - Text - Dynamic */}
             <div className="space-y-2 mt-10">
               {aboutData.additional_text.map((line, index) => (
-                <p key={index} className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base">
+                <p key={index} className="text-gray-700 leading-relaxed mt-4 ml-8 text-sm md:text-base text-justify">
                   {line.text || line}
                 </p>
               ))}
@@ -413,21 +414,21 @@ export default function About() {
       <section className="w-full bg-white py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="bg-white rounded-3xl p-8 md:p-12 border-r-4 border-b-4 border-gray-300">
-            <div className="text-gray-900 leading-relaxed text-sm md:text-base">
+            <div className="text-gray-900 leading-relaxed text-sm md:text-base text-justify">
               {aboutData.brand_story ? (
                 <div
+                  className="text-justify"
                   dangerouslySetInnerHTML={{ __html: aboutData.brand_story }}
                 />
               ) : (
-                <p>Dr. Osaren Emokpae is a distinguished scholar...</p>
+                <p className="text-justify">Dr. Osaren Emokpae is a distinguished scholar...</p>
               )}
             </div>
           </div>
         </div>
       </section>
 
-
-         {/* Location and email */}
+      {/* Location and email */}
       <section className="w-full py-12 md:py-13 -mt-8">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="bg-white grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-60 mt-8 items-start max-w-6xl mx-auto px-4 md:px-8">
@@ -438,7 +439,7 @@ export default function About() {
                   Location
                 </p>
                 <p className="text-sm md:text-base font-bold text-gray-600">
-                 The Summit, Autumn Glen, 
+                  The Summit, Autumn Glen, 
                 </p>
                 <p className="text-sm md:text-base font-bold text-gray-600">Columbia, U.S.A</p>
               </div>
@@ -450,7 +451,7 @@ export default function About() {
                   Email
                 </p>
                 <p className="text-sm md:text-base font-bold text-gray-600">
-                 osaremokpae@yahoo.com
+                  osaremokpae@yahoo.com
                 </p>
               </div>
             </div>

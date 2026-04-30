@@ -461,9 +461,9 @@ export default function Home() {
               e.target.src = "/second-Img.png";
             }}
           />
-          <p className="text-sm md:text-base leading-relaxed md:mt-14">
-            {biography.content}
-          </p>
+          <div className="text-sm md:text-base leading-relaxed md:mt-14 text-justify">
+      {biography.content}
+    </div>
         </div>
       </section>
 
