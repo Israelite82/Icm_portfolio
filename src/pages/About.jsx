@@ -199,25 +199,7 @@ export default function About() {
                   ))}
                 </div>
                 
-                {/* Post Doctoral Degrees - Dynamic */}
-                <h4 className="text-lg md:text-xl text-gray-600 font-bold mb-4 mt-12">
-                  Degrees
-                </h4>
-                <div className="space-y-3">
-                  {aboutData.post_doctoral_degrees.map((degree, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <img src="Frame1.png" alt="" />
-                      <div>
-                        <p className="text-gray-400 text-sm mb-2">
-                          {degree.title}
-                        </p>
-                        <p className="text-sm md:text-base font-semibold text-gray-600">
-                          {degree.institution}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+               
               </div>
             </div>
           </div>
