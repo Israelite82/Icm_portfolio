@@ -480,7 +480,7 @@ export default function Home() {
                 src="homebook1.png"
                 alt="Book Title 1"
                 className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                onClick={() => navigate('/books/book1')}
+                onClick={() => navigate('/books')}
                 onError={(e) => { e.target.src = "/book-placeholder.png"; }}
               />
             </div>
@@ -491,7 +491,7 @@ export default function Home() {
                 src="homebook2.png"
                 alt="Book Title 2"
                 className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                onClick={() => navigate('/books/book2')}
+                onClick={() => navigate('/books')}
                 onError={(e) => { e.target.src = "/book-placeholder.png"; }}
               />
             </div>
@@ -502,7 +502,7 @@ export default function Home() {
                 src="homebook3.png"
                 alt="Book Title 3"
                 className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                onClick={() => navigate('/books/book3')}
+                onClick={() => navigate('/books')}
                 onError={(e) => { e.target.src = "/book-placeholder.png"; }}
               />
             </div>
@@ -513,7 +513,7 @@ export default function Home() {
                 src="homebook4.png"
                 alt="Book Title 4"
                 className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                onClick={() => navigate('/books/book4')}
+                onClick={() => navigate('/books')}
                 onError={(e) => { e.target.src = "/book-placeholder.png"; }}
               />
             </div>
