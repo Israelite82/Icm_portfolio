@@ -36,8 +36,6 @@ export default function Home() {
     Books: true,
   });
 
-  
-
   const fetchHomepageData = async () => {
     try {
       const response = await axios.get(`${API_URL}/homepage`);
@@ -376,7 +374,7 @@ export default function Home() {
               {slides.map((slide, index) => (
                 <div key={index} className="min-w-full h-full">
                   {slide.hasText ? (
-                    // Slides WITH text
+                    // Slides WITH text - split layout
                     <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
                       <img
                         src={slide.image}
@@ -402,17 +400,16 @@ export default function Home() {
                       </div>
                     </div>
                   ) : (
-                    // Slides WITHOUT text
-                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
+                    // Slides WITHOUT text - FULL SCREEN IMAGE
+                    <div className="w-full h-full bg-[#0b1227] rounded-2xl overflow-hidden">
                       <img
                         src={slide.image}
                         alt="Slide"
-                        className="w-full h-96 object-cover"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.src = `/slide${index + 1}.png`;
                         }}
                       />
-                      <div className="h-[240px] md:hidden"></div>
                     </div>
                   )}
                 </div>
@@ -422,7 +419,7 @@ export default function Home() {
 
           <button
             onClick={prevSlide}
-            className="absolute left-2 md:-left-1 top-[50%] md:top-[75%] -translate-y-1/2 md:-translate-x-1/2 z-30 
+            className="absolute left-2 md:-left-1 top-[50%] md:top-[50%] -translate-y-1/2 md:-translate-x-1/2 z-30 
             w-8 h-8 md:w-10 md:h-10 bg-[#15263B]/40 hover:bg-[#0b1227]/80 rounded-full flex items-center
              justify-center text-white text-xl md:text-2xl transition"
           >
@@ -431,7 +428,7 @@ export default function Home() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-2 md:right-0 top-[50%] md:top-[75%] -translate-y-1/2 md:translate-x-1/2 z-30
+            className="absolute right-2 md:right-0 top-[50%] md:top-[50%] -translate-y-1/2 md:translate-x-1/2 z-30
              w-8 h-8 md:w-10 md:h-10 bg-[#0b1227]/60 hover:bg-[#0b1227]/80 rounded-full flex items-center
               justify-center text-white text-xl md:text-2xl transition"
           >
