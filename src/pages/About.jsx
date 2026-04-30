@@ -200,7 +200,7 @@ export default function About() {
                 
                 {/* Post Doctoral Degrees - Dynamic */}
                 <h4 className="text-lg md:text-xl text-gray-600 font-bold mb-4 mt-12">
-                  Post Doctoral Degrees
+                  Degrees
                 </h4>
                 <div className="space-y-3">
                   {aboutData.post_doctoral_degrees.map((degree, index) => (
