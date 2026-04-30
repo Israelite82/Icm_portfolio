@@ -451,21 +451,23 @@ export default function Home() {
       </div>
 
       {/* BIOGRAPHY CARD - Dynamic from API */}
-      <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-20">
-        <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-6 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
-          <img
-            src={biography.image}
-            alt="Biography"
-            className="w-full h-65 md:h-[24rem] object-cover rounded-xl"
-            onError={(e) => {
-              e.target.src = "/second-Img.png";
-            }}
-          />
-          <div className="text-sm md:text-base leading-relaxed md:mt-14 text-justify">
+    <section className="w-full max-w-[1280px] mx-auto mt-12 md:mt-20 px-4 md:px-6">
+  <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl flex flex-col md:grid md:grid-cols-2 shadow-lg overflow-hidden">
+    <div className="w-full h-65 md:h-auto">
+      <img
+        src={biography.image}
+        alt="Biography"
+        className="w-full h-full object-contain md:object-cover object-top"
+        onError={(e) => {
+          e.target.src = "/second-Img.png";
+        }}
+      />
+    </div>
+    <div className="p-6 md:p-8 text-sm md:text-base leading-relaxed text-justify flex items-center">
       {biography.content}
     </div>
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* BOOKS SECTION - Hardcoded images for now */}
       <section className="relative w-full mt-20 md:mt-32 px-4">
