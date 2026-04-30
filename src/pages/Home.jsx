@@ -24,87 +24,172 @@ export default function Home() {
     Books: true,
   });
 
-  useEffect(() => {
-    // Fetch homepage settings from admin API
-    axios
-      .get(`${API_URL}/homepage`)
-      .then((res) => {
-        const homepageData = res.data.data || res.data;
-        console.log("Homepage data:", homepageData);
+  
 
-        // --- CRITICAL CHANGE: Only fetch data for the SECOND slide ---
-        if (homepageData.hero) {
-          // This data is ONLY for the second slide
-          setForm({
-            headline: homepageData.hero.headline || "Welcome",
-            subtext: homepageData.hero.subtext || "",
-          });
-
-          if (homepageData.hero.background_image) {
-            setHeroImage(homepageData.hero.background_image);
+  const fetchHomepageData = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/homepage`);
+      const data = response.data.data || response.data;
+      console.log("Homepage data:", data);
+      
+      // Update hero slide data (slide 2)
+      if (data.hero) {
+        setHeroSlideData({
+          headline: data.hero.headline || "Welcome",
+          subtext: data.hero.subtext || "",
+          background_image: data.hero.background_image
+        });
+      }
+      
+      // Update all slides from API
+      if (data.slides && data.slides.length === 4) {
+        const formattedSlides = data.slides.map(slide => ({
+          id: slide.id,
+          image: slide.image,
+          title: slide.title,
+          subtitle: slide.subtitle,
+          hasText: slide.has_text,
+          button_text: slide.button_text,
+          button_link: slide.button_link
+        }));
+        setSlides(formattedSlides);
+      } else {
+        // Fallback to default slides if API doesn't return them
+        setSlides([
+          {
+            id: null,
+            image: "/bioImg.png",
+            title: "Dr. Osaren Emokpae",
+            subtitle: "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
+            hasText: true,
+            button_text: "Read Full Bio",
+            button_link: "/about"
+          },
+          {
+            id: null,
+            image: heroSlideData.background_image || "/slide2.png",
+            title: heroSlideData.headline,
+            subtitle: heroSlideData.subtext,
+            hasText: true,
+            button_text: "Read Full Bio",
+            button_link: "/about"
+          },
+          {
+            id: null,
+            image: "/slide3.png",
+            title: null,
+            subtitle: null,
+            hasText: false,
+            button_text: null,
+            button_link: null
+          },
+          {
+            id: null,
+            image: "/slide4.png",
+            title: null,
+            subtitle: null,
+            hasText: false,
+            button_text: null,
+            button_link: null
           }
+        ]);
+      }
+      
+      // Update biography section
+      if (data.biography) {
+        setBiography({
+          image: data.biography.image || "/second-Img.png",
+          content: data.biography.content || biography.content
+        });
+      }
+      
+      // Update media section
+      if (data.media) {
+        setMedia({
+          title: data.media.title || "Click the image below to watch our teachings on YouTube",
+          youtube_url: data.media.youtube_url || "https://www.youtube.com/@theanchor1079",
+          button_text: data.media.button_text || "YouTube Channel",
+          background_color: data.media.background_color || "#dc2626",
+          icon_color: data.media.icon_color || "#ffffff"
+        });
+      }
+      
+      // Visibility from sections (if needed)
+      if (data.sections && typeof data.sections === "object") {
+        const sectionNames = Object.values(data.sections).map(
+          (section) => section.name
+        );
+        setVisibility({
+          Hero: sectionNames.includes("Hero"),
+          Teaching: sectionNames.includes("Featured teaching"),
+          Blog: sectionNames.includes("Featured blog"),
+          Books: sectionNames.includes("Featured book"),
+        });
+      }
+      
+    } catch (error) {
+      console.error("Error fetching homepage data:", error);
+      // Fallback to default slides if API fails
+      setSlides([
+        {
+          id: null,
+          image: "/bioImg.png",
+          title: "Dr. Osaren Emokpae",
+          subtitle: "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
+          hasText: true,
+          button_text: "Read Full Bio",
+          button_link: "/about"
+        },
+        {
+          id: null,
+          image: "/slide2.png",
+          title: "Welcome",
+          subtitle: "",
+          hasText: true,
+          button_text: "Read Full Bio",
+          button_link: "/about"
+        },
+        {
+          id: null,
+          image: "/slide3.png",
+          title: null,
+          subtitle: null,
+          hasText: false,
+          button_text: null,
+          button_link: null
+        },
+        {
+          id: null,
+          image: "/slide4.png",
+          title: null,
+          subtitle: null,
+          hasText: false,
+          button_text: null,
+          button_link: null
         }
+      ]);
+    }
+  };
 
-        // Visibility from sections object
-        if (homepageData.sections && typeof homepageData.sections === "object") {
-          const sectionNames = Object.values(homepageData.sections).map(
-            (section) => section.name
-          );
+  const fetchBooks = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/books`);
+      const booksData = response.data.data?.data || response.data.data || response.data;
+      setBooks(Array.isArray(booksData) ? booksData.slice(0, 4) : []);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+  };
 
-          setVisibility({
-            Hero: sectionNames.includes("Hero"),
-            Teaching: sectionNames.includes("Featured teaching"),
-            Blog: sectionNames.includes("Featured blog"),
-            Books: sectionNames.includes("Featured book"),
-          });
-        }
-      })
-      .catch((err) => console.error("Error fetching homepage settings:", err));
-
-    // Fetch books
-    axios
-      .get(`${API_URL}/books`)
-      .then((res) => {
-        const booksData = res.data.data?.data || res.data.data || res.data;
-        setBooks(Array.isArray(booksData) ? booksData.slice(0, 4) : []);
-      })
-      .catch((err) => console.error("Error fetching books:", err));
-
-    // Fetch blog posts
-    axios
-      .get(`${API_URL}/blog-posts`)
-      .then((res) => {
-        const blogData = res.data.data || [];
-        setBlogPosts(Array.isArray(blogData) ? blogData.slice(0, 3) : []);
-      })
-      .catch((err) => console.error("Error fetching blog posts:", err));
-  }, []);
-
-  // --- CRITICAL CHANGE: Slides are now separate: First Slide (Hardcoded), Second Slide (Dynamic) ---
-  const slides = [
-    {
-      // SLIDE 1: PERFECTLY HARDCODED - Will NEVER change
-      image: "/bioImg.png",
-      title: "Dr. Osaren Emokpae",
-      subtitle:
-        "Scholar▫️Teacher▫️Christian Leader▫️Writer▫️Entrepreneur",
-      hasText: true,
-    },
-    {
-       image: heroImage || "/slide2.png",
-    title: form.headline || "Welcome",
-    subtitle: form.subtext || "",
-    hasText: true,
-    },
-    {
-      image: "/slide3.png",
-      hasText: false,
-    },
-    {
-      image: "/slide4.png",
-      hasText: false,
-    },
-  ];
+  const fetchBlogPosts = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/blog-posts`);
+      const blogData = response.data.data || [];
+      setBlogPosts(Array.isArray(blogData) ? blogData.slice(0, 3) : []);
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+    }
+  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % 4);
@@ -258,51 +343,56 @@ export default function Home() {
               className="flex h-full transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-            {slides.map((slide, index) => (
-  <div key={index} className="min-w-full h-full">
-    {slide.hasText ? (
-      // Slides WITH text (Slide 1 and 2)
-      <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
-    <img
-  src={slide.image}
-  alt="Biography"
-  className={`w-full ${index === 1 ? 'h-96' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
-/>
-       <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
-            {slide.title}
-          </h1>
-          <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
-            {slide.subtitle}
-          </p>
-          <button
-            onClick={() => navigate("/about")}
-            className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
-          >
-            Read Full Bio
-          </button>
-        </div>
-      </div>
-    ) : (
-      
-      <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
-        <img
-          src={slide.image}
-          alt="Slide"
-          className="w-full h-96 object-cover"
-        />
-        {/* Empty div with same height as text section on mobile */}
-        <div className="h-[240px] md:hidden"></div>
-      </div>
-    )}
-  </div>
-))}
+              {slides.map((slide, index) => (
+                <div key={index} className="min-w-full h-full">
+                  {slide.hasText ? (
+                    // Slides WITH text
+                    <div className={`flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full`}>
+                      <img
+                        src={slide.image}
+                        alt="Slide"
+                        className={`w-full ${index === 1 ? 'h-96' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
+                        onError={(e) => {
+                          e.target.src = index === 0 ? "/bioImg.png" : "/slide2.png";
+                        }}
+                      />
+                      <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
+                          {slide.title}
+                        </h1>
+                        <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
+                          {slide.subtitle}
+                        </p>
+                        <button
+                          onClick={() => navigate(slide.button_link || "/about")}
+                          className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
+                        >
+                          {slide.button_text || "Read Full Bio"}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    // Slides WITHOUT text
+                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
+                      <img
+                        src={slide.image}
+                        alt="Slide"
+                        className="w-full h-96 object-cover"
+                        onError={(e) => {
+                          e.target.src = `/slide${index + 1}.png`;
+                        }}
+                      />
+                      <div className="h-[240px] md:hidden"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
           <button
             onClick={prevSlide}
-            className="absolute left-2 md:-left-1 top-[50%] md:top-[75%] -translate-y-1/2 md:-translate-x-1/2 z-30 
+            className="absolute left-2 md:-left-1 top-[50%] md:top-[50%] -translate-y-1/2 md:-translate-x-1/2 z-30 
             w-8 h-8 md:w-10 md:h-10 bg-[#15263B]/40 hover:bg-[#0b1227]/80 rounded-full flex items-center
              justify-center text-white text-xl md:text-2xl transition"
           >
@@ -311,7 +401,7 @@ export default function Home() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-2 md:right-0 top-[50%] md:top-[75%] -translate-y-1/2 md:translate-x-1/2 z-30
+            className="absolute right-2 md:right-0 top-[50%] md:top-[50%] -translate-y-1/2 md:translate-x-1/2 z-30
              w-8 h-8 md:w-10 md:h-10 bg-[#0b1227]/60 hover:bg-[#0b1227]/80 rounded-full flex items-center
               justify-center text-white text-xl md:text-2xl transition"
           >
