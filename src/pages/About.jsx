@@ -257,53 +257,52 @@ export default function About() {
               </div>
 
               {/* Right: Image */}
-              <div className="space-y-8">
-                <div className="w-full">
-                  <img
-                    src={aboutData.apostle_image || "Hero02.png"}
-                    alt="Apostle Osaren Emokpae"
-                    className="w-full h-96 object-cover rounded-xl"
-                  />
-                </div>
-                <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
-                  <a
-                    href={aboutData.youtube_link || "https://www.youtube.com/@theanchor1079"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src="youtube.png"
-                      alt="YouTube"
-                      className="cursor-pointer h-12"
-                    />
-                  </a>
-
-                  <a
-                    href={aboutData.linkedin_link || "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src="linkedin.png"
-                      alt="LinkedIn"
-                      className="cursor-pointer"
-                    />
-                  </a>
-                </div>
-                <hr className="border-gray-500" />
-                
-                {/* Passion Section - NOW DYNAMIC */}
-                <div className="bg-white border-l-8 border-t-8 border-gray-600 rounded-3xl p-6">
-                  <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-3">
-                    <img src="fire.png" alt="" />
-                    Passion
-                  </h3>
-                  <p className="text-gray-700 text-justify">
-                    {aboutData.passion || "Monitoring the next generation of leaders"}
-                  </p>
-                </div>
-                <hr className="border-gray-500" />
-              </div>
+             <div className="space-y-8">
+  <div className="w-full -m-0">
+    <img
+      src={aboutData.apostle_image || "Hero02.png"}
+      alt="Apostle Osaren Emokpae"
+      className="w-full h-96 object-cover object-top rounded-xl"
+    />
+  </div>
+  <div className="flex items-center gap-3 -mt-4 mb-1 ml-8">
+    <a
+      href={aboutData.youtube_link || "https://www.youtube.com/@theanchor1079"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="youtube.png"
+        alt="YouTube"
+        className="cursor-pointer h-12"
+      />
+    </a>
+    <a
+      href={aboutData.linkedin_link || "https://www.linkedin.com/in/osaren-emokpae-phd-dba-fbim-frpa-mcid-207b268/"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="linkedin.png"
+        alt="LinkedIn"
+        className="cursor-pointer"
+      />
+    </a>
+  </div>
+  <hr className="border-gray-500" />
+  
+  {/* Passion Section - NOW DYNAMIC */}
+  <div className="bg-white border-l-8 border-t-8 border-gray-600 rounded-3xl p-6">
+    <h3 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-3">
+      <img src="fire.png" alt="" />
+      Passion
+    </h3>
+    <p className="text-gray-700 text-justify">
+      {aboutData.passion || "Monitoring the next generation of leaders"}
+    </p>
+  </div>
+  <hr className="border-gray-500" />
+</div>
             </div>
           </div>
         </div>
