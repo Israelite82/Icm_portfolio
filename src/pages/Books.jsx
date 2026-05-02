@@ -93,19 +93,19 @@ export default function Books() {
                     <div className="p-6 md:p-8 flex-1">
                       {/* Book Title */}
                       {(() => {
-                        const words = book.title?.split(" ") || [];
-                        const firstPart = words.slice(0, 3).join(" ");
-                        const secondPart = words.slice(3).join(" ");
+                        // const words = book.title?.split(" ") || [];
+                        // const firstPart = words.slice(0, 3).join(" ");
+                        // const secondPart = words.slice(3).join(" ");
                         return (
                           <>
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-10">
-                              {firstPart}
+                              {book.title}
                             </h3>
-                            {secondPart && (
+                            {/* {secondPart && (
                               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                                 {secondPart}
                               </h3>
-                            )}
+                            )} */}
                           </>
                         );
                       })()}
