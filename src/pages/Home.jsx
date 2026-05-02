@@ -192,7 +192,7 @@ export default function Home() {
 
     fetchHomepageData();
     fetchBlogPosts();
-  }, []);
+  } []);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
