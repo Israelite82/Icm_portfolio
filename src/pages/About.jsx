@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 
 const API_URL = "https://api.osarenemokpae.com/api";
@@ -6,6 +7,8 @@ const API_URL = "https://api.osarenemokpae.com/api";
 export default function About() {
   const [aboutData, setAboutData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+
 
   useEffect(() => {
     const fetchAbout = async () => {
@@ -60,6 +63,7 @@ export default function About() {
           // Social media links
           youtube_link: data.youtube_link || "",
           linkedin_link: data.linkedin_link || "",
+           custom_sections: data.custom_sections || []
         };
 
         setAboutData(mappedData);
@@ -87,6 +91,129 @@ export default function About() {
       </div>
     );
   }
+
+  // Add this function inside your About component
+const renderCustomSection = (section) => {
+  const data = section.data;
+  
+  switch(section.type) {
+    case 'text':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
+            {data.heading && <h2 className="text-2xl md:text-3xl font-bold mb-6 text-justify">{data.heading}</h2>}
+            <div className="text-gray-700 leading-relaxed text-justify">
+              {data.content}
+            </div>
+          </div>
+        </section>
+      );
+      
+    case 'richtext':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
+            <div className="prose max-w-none text-justify" dangerouslySetInnerHTML={{ __html: data.content }} />
+          </div>
+        </section>
+      );
+      
+    case 'image':
+      return (
+  <section className="w-full py-12 md:py-16">
+    <div className="max-w-4xl mx-auto px-4 md:px-6">
+      <div className={`text-${data.alignment || 'center'}`}>
+        <div className="flex justify-center">
+          <img 
+            src={data.image_url} 
+            alt={data.caption} 
+            className="w-full max-w-2xl h-auto max-h-[400px] object-contain rounded-lg shadow-md" 
+          />
+        </div>
+        {data.caption && <p className="mt-3 text-gray-500 text-sm">{data.caption}</p>}
+      </div>
+    </div>
+  </section>
+);
+      
+    case 'two_column':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="text-justify" dangerouslySetInnerHTML={{ __html: data.left_content }} />
+              <div className="text-justify" dangerouslySetInnerHTML={{ __html: data.right_content }} />
+            </div>
+          </div>
+        </section>
+      );
+      
+    case 'cards':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {data.cards?.map((card, idx) => (
+                <div key={idx} className="bg-white rounded-lg shadow-lg p-6 text-center">
+                  {card.icon && <img src={card.icon} alt={card.title} className="w-12 h-12 mx-auto mb-4" />}
+                  <h3 className="text-xl font-bold mb-2">{card.title}</h3>
+                  <p className="text-gray-600 mb-4 text-justify">{card.description}</p>
+                  {card.link && <a href={card.link} className="text-blue-600 hover:underline">Learn More →</a>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+      
+    case 'quote':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-4 md:px-6">
+            <div className="rounded-2xl p-8 md:p-12 text-center" style={{ backgroundColor: data.background_color || '#f3f4f6' }}>
+              <p className="text-xl md:text-2xl italic mb-4 text-justify">"{data.text}"</p>
+              {data.author && <p className="text-gray-600">— {data.author}</p>}
+            </div>
+          </div>
+        </section>
+      );
+      
+    case 'cta':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
+            <div className="rounded-2xl p-8 md:p-12" style={{ backgroundColor: data.background_color || '#1e3a8a' }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{data.title}</h2>
+              {data.button_text && data.button_link && (
+                <a href={data.button_link} className="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                  {data.button_text}
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+      
+    case 'skills_grid':
+      return (
+        <section className="w-full py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {data.skills?.map((skill, idx) => (
+                <div key={idx} className="text-center p-4 bg-gray-50 rounded-lg">
+                  {skill.icon && <img src={skill.icon} alt={skill.name} className="w-8 h-8 mx-auto mb-2" />}
+                  <span className="text-gray-700">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+      
+    default:
+      return null;
+  }
+};
 
   return (
     <div className="min-h-screen w-full bg-white">
@@ -460,6 +587,12 @@ export default function About() {
           </div>
         </div>
       </section>
+      {/* Custom Sections from Admin */}
+{aboutData.custom_sections?.map((section) => (
+  <React.Fragment key={section.id}>
+    {section.visible && renderCustomSection(section)}
+  </React.Fragment>
+))}
     </div>
   );
 }
