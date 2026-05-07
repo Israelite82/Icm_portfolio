@@ -48,14 +48,32 @@ export default function TeachingDetail() {
   }
 
   // Extract YouTube video ID from URL if exists
-  const getYouTubeEmbedUrl = (url) => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
-  };
+ const getYouTubeEmbedUrl = (url) => {
+  if (!url) return null;
 
-  const videoEmbedUrl = teaching.video_embed_url ? getYouTubeEmbedUrl(teaching.video_embed_url) : null;
+  // Clean escaped slashes
+  let cleanUrl = url.replace(/\\\//g, '/');
+
+  // Extract URL from markdown-style link: [text](url) → url
+  const markdownMatch = cleanUrl.match(/\]\((https?:\/\/[^)]+)\)/);
+  if (markdownMatch) {
+    cleanUrl = markdownMatch[1];
+  }
+
+  // Handle YouTube Shorts → convert to embeddable format
+  const shortsMatch = cleanUrl.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+  if (shortsMatch) {
+    return `https://www.youtube.com/embed/${shortsMatch[1]}`;
+  }
+
+  // Handle regular YouTube URLs
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = cleanUrl.match(regExp);
+  return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
+};
+
+const videoEmbedUrl = getYouTubeEmbedUrl(teaching.video_embed_url);
+  console.log(videoEmbedUrl)
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-milkWhite">
