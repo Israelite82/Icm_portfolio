@@ -374,7 +374,7 @@ const renderStaticSection = (name) => {
                 <div className="max-w-6xl mx-auto px-4 md:px-6">
                   <h2 className="text-2xl md:text-3xl text-gray-900 font-bold">Mission</h2>
                   <div className="border-b-4 border-red-700 w-16 mt-4"></div>
-                  <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0 border-gray-400 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
+                  <div className="bg-[#FFF5E1] rounded-3xl p-8 md:p-12 mt-8 border border-r-0 border-b-0  text-gray-800 border-gray-400 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)]">
                     {aboutData.mission_statement_1 ? <div dangerouslySetInnerHTML={{ __html: aboutData.mission_statement_1 }} /> : <p className="text-md text-gray-800 leading-relaxed text-justify">A National Leader/General Overseer Emeritus...</p>}
                   </div>
                 </div>
