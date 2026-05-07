@@ -103,7 +103,8 @@ const videoEmbedUrl = getYouTubeEmbedUrl(teaching.video_embed_url);
       {/* Content Section */}
       <section className="w-full bg-[#FFF5E1] py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
-          <div className="bg-white rounded-xl shadow-lg p-6 md:p-10">
+          <a href={teaching.video_embed_url} target="_blank">
+<div className="bg-white rounded-xl shadow-lg p-6 md:p-10">
             {/* Thumbnail/Image */}
             {teaching.thumbnail && (
               <img
@@ -123,18 +124,7 @@ const videoEmbedUrl = getYouTubeEmbedUrl(teaching.video_embed_url);
             )}
 
             {/* YouTube Video Embed */}
-            {videoEmbedUrl && (
-              <div className="mb-8 aspect-video">
-                <iframe
-                  src={videoEmbedUrl}
-                  title={teaching.teaching_title}
-                  className="w-full h-full rounded-lg"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            )}
+           
 
             {/* Audio Player */}
             {teaching.audio_file && (
@@ -159,7 +149,7 @@ const videoEmbedUrl = getYouTubeEmbedUrl(teaching.video_embed_url);
             <div className="prose prose-lg max-w-none text-uppercase text-gray-700">
               <div dangerouslySetInnerHTML={{ __html: teaching.description || teaching.transcript || teaching.content }} />
             </div>
-           hr
+         
 
             {/* Tags
             {teaching.tags && teaching.tags.length > 0 && (
@@ -175,6 +165,8 @@ const videoEmbedUrl = getYouTubeEmbedUrl(teaching.video_embed_url);
               </div>
             )} */}
           </div>
+          </a>
+          
         </div>
       </section>
     </div>
