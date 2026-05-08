@@ -85,8 +85,10 @@ console.log('section type:', JSON.stringify(section.type));
     
    case 'image': {
   // Correctly replace escaped \/ sequences with /
-  const imageUrl = (data?.image_url || '').replace(/\\\//g, '/');
+  const imagePath = (data?.image_path || '').replace(/\\\//g, '/');
+  const imageUrl = `https://api.osarenemokpae.com/storage/${imagePath}`
   const hasImage = Boolean(imageUrl);
+  
 
   console.log('imageUrl:', imageUrl);
 
