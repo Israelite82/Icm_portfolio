@@ -304,13 +304,16 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
             {["homebook1.png", "homebook2.png", "homebook3.png", "homebook4.png"].map((book, index) => (
               <div key={index} className="w-full flex justify-center">
-                <img
+                <Link to={`/books`}>
+                 <img
                   src={book}
                   alt={`Book ${index + 1}`}
                   className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                  onClick={() => window.location.href = `/books`}
+                  // onClick={() => window.location.href = `/books`}
                   onError={(e) => { e.target.src = "/book-placeholder.png"; }}
                 />
+                </Link>
+               
               </div>
             ))}
           </div>
