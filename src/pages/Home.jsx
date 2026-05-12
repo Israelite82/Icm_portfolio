@@ -178,48 +178,100 @@ export default function Home() {
       </nav>
 
       {/* HERO CAROUSEL */}
-      <section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-10 overflow-hidden">
-        <div className="hidden md:block absolute top-0 left-0 w-[600px] h-full bg-[#6B0F1A] z-0" style={{ clipPath: "polygon(0 0, 100% 0, 80% 70%, 0 100%)" }}></div>
-        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[750px] h-full bg-[#6B0F1A] z-0"></div>
-        <div className="hidden md:block absolute top-0 right-0 w-[400px] h-full bg-[#6B0F1A] z-0" style={{ clipPath: "polygon(20% 0, 100% 0, 100% 80%, 0 100%)" }}></div>
-        <div className="md:hidden absolute inset-0 bg-[#6B0F1A] z-0"></div>
+<section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-10 overflow-hidden">
+  <div
+    className="hidden md:block absolute top-0 left-0 w-[600px] h-full bg-[#6B0F1A] z-0"
+    style={{ clipPath: "polygon(0 0, 100% 0, 80% 70%, 0 100%)" }}
+  ></div>
 
-        <div className="relative z-10 mt-4 max-w-full md:max-w-[1100px] h-auto md:h-[600px] mx-auto">
-          <div className="relative w-full h-full overflow-hidden rounded-2xl">
-            <div className="flex h-full transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-              {slides.map((slide, index) => (
-                <div key={index} className="min-w-full h-full">
-                  {slide.hasText ? (
-                    <div className="flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full">
-                      <img
-                        src={slide.image}
-                        alt="Slide"
-                        className={`w-full ${index === 1 ? 'h-96' : 'h-65'} md:h-full object-cover object-top ${index === 1 ? 'md:w-3/5' : 'md:w-1/2'}`}
-                        onError={(e) => { e.target.src = index === 0 ? "/bioImg.png" : "/slide2.png"; }}
-                      />
-                      <div className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${index === 1 ? 'md:w-2/5' : 'md:w-1/2'}`}>
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">{slide.title}</h1>
-                        <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">{slide.subtitle}</p>
-                        <button onClick={() => navigate(slide.button_link || "/about")} className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm">
-                          {slide.button_text || "Read Full Bio"}
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
-                      <img src={slide.image} alt="Slide" className="w-full h-96 object-cover" onError={(e) => { e.target.src = `/slide${index + 1}.png`; }} />
-                      <div className="h-[240px] md:hidden"></div>
-                    </div>
-                  )}
+  <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[750px] h-full bg-[#6B0F1A] z-0"></div>
+
+  <div
+    className="hidden md:block absolute top-0 right-0 w-[400px] h-full bg-[#6B0F1A] z-0"
+    style={{ clipPath: "polygon(20% 0, 100% 0, 100% 80%, 0 100%)" }}
+  ></div>
+
+  <div className="md:hidden absolute inset-0 bg-[#6B0F1A] z-0"></div>
+
+  <div className="relative z-10 mt-4 max-w-full md:max-w-[1100px] h-auto md:h-[600px] mx-auto">
+    <div className="relative w-full h-full overflow-hidden rounded-2xl">
+      <div
+        className="flex h-full transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {slides.map((slide, index) => (
+          <div key={index} className="min-w-full h-full">
+            {slide.hasText ? (
+              <div className="flex flex-col md:flex-row bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full">
+                <img
+                  src={slide.image}
+                  alt="Slide"
+                  className={`w-full ${
+                    index === 1 ? "h-96" : "h-65"
+                  } md:h-full object-cover object-top ${
+                    index === 1 ? "md:w-3/5" : "md:w-1/2"
+                  }`}
+                  onError={(e) => {
+                    e.target.src =
+                      index === 0 ? "/bioImg.png" : "/slide2.png";
+                  }}
+                />
+
+                <div
+                  className={`p-6 pb-8 md:p-12 md:relative md:-top-20 flex flex-col justify-center text-white ${
+                    index === 1 ? "md:w-2/5" : "md:w-1/2"
+                  }`}
+                >
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 italic">
+                    {slide.title}
+                  </h1>
+
+                  <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-12">
+                    {slide.subtitle}
+                  </p>
+
+                  <button
+                    onClick={() =>
+                      navigate(slide.button_link || "/about")
+                    }
+                    className="bg-blue-600 hover:bg-blue-700 transition w-fit px-6 md:px-8 py-2 md:ml-6 rounded-lg text-sm"
+                  >
+                    {slide.button_text || "Read Full Bio"}
+                  </button>
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full">
+                <img
+                  src={slide.image}
+                  alt="Slide"
+                  className="w-full h-full min-h-[400px] md:min-h-[600px] object-cover"
+                  onError={(e) => {
+                    e.target.src = `/slide${index + 1}.png`;
+                  }}
+                />
+              </div>
+            )}
           </div>
+        ))}
+      </div>
+    </div>
 
-          <button onClick={prevSlide} className="absolute left-2 md:-left-1 top-[50%] md:top-[50%] -translate-y-1/2 md:-translate-x-1/2 z-30 w-8 h-8 md:w-10 md:h-10 bg-[#15263B]/40 hover:bg-[#0b1227]/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition">‹</button>
-          <button onClick={nextSlide} className="absolute right-2 md:right-0 top-[50%] md:top-[50%] -translate-y-1/2 md:translate-x-1/2 z-30 w-8 h-8 md:w-10 md:h-10 bg-[#0b1227]/60 hover:bg-[#0b1227]/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition">›</button>
-        </div>
-      </section>
+    <button
+      onClick={prevSlide}
+      className="absolute left-2 md:-left-1 top-[50%] md:top-[50%] -translate-y-1/2 md:-translate-x-1/2 z-30 w-8 h-8 md:w-10 md:h-10 bg-[#15263B]/40 hover:bg-[#0b1227]/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition"
+    >
+      ‹
+    </button>
+
+    <button
+      onClick={nextSlide}
+      className="absolute right-2 md:right-0 top-[50%] md:top-[50%] -translate-y-1/2 md:translate-x-1/2 z-30 w-8 h-8 md:w-10 md:h-10 bg-[#0b1227]/60 hover:bg-[#0b1227]/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition"
+    >
+      ›
+    </button>
+  </div>
+</section>
 
       {/* Slider indicators */}
       <div className="flex justify-center gap-3 md:gap-4 -mt-0 mb-6">
