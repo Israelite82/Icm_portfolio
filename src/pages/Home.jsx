@@ -256,7 +256,7 @@ export default function Home() {
                   src={book}
                   alt={`Book ${index + 1}`}
                   className="h-[12.5rem] md:h-[24rem] pb-16 -mt-5 w-auto object-contain cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                  onClick={() => window.location.href = `/books/book${index + 1}`}
+                  onClick={() => window.location.href = `/books`}
                   onError={(e) => { e.target.src = "/book-placeholder.png"; }}
                 />
               </div>
