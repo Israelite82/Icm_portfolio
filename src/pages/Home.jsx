@@ -177,7 +177,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO CAROUSEL */}
+  {/* HERO CAROUSEL */}
       <section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-10 overflow-hidden">
         <div className="hidden md:block absolute top-0 left-0 w-[600px] h-full bg-[#6B0F1A] z-0" style={{ clipPath: "polygon(0 0, 100% 0, 80% 70%, 0 100%)" }}></div>
         <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[750px] h-full bg-[#6B0F1A] z-0"></div>
@@ -205,12 +205,16 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                  ) : (
-                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
-                      <img src={slide.image} alt="Slide" className="w-full h-96 object-cover" onError={(e) => { e.target.src = `/slide${index + 1}.png`; }} />
-                      <div className="h-[240px] md:hidden"></div>
-                    </div>
-                  )}
+                ) : (
+  <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
+    <img
+      src={slide.image}
+      alt="Slide"
+      className="w-full flex-1 object-cover"
+      onError={(e) => { e.target.src = `/slide${index + 1}.png`; }}
+    />
+  </div>
+)}
                 </div>
               ))}
             </div>
@@ -221,6 +225,7 @@ export default function Home() {
         </div>
       </section>
 
+```
       {/* Slider indicators */}
       <div className="flex justify-center gap-3 md:gap-4 -mt-0 mb-6">
         {slides.map((_, index) => (
