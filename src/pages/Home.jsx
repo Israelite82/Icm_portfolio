@@ -205,16 +205,12 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                ) : (
-  <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
-    <img
-      src={slide.image}
-      alt="Slide"
-      className="w-full flex-1 object-cover"
-      onError={(e) => { e.target.src = `/slide${index + 1}.png`; }}
-    />
-  </div>
-)}
+                  ) : (
+                    <div className="bg-[#0b1227] shadow-lg rounded-2xl overflow-hidden h-full flex flex-col">
+                      <img src={slide.image} alt="Slide" className="w-full h-96 object-cover" onError={(e) => { e.target.src = `/slide${index + 1}.png`; }} />
+                      <div className="h-[240px] md:hidden"></div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -225,7 +221,6 @@ export default function Home() {
         </div>
       </section>
 
-```
       {/* Slider indicators */}
       <div className="flex justify-center gap-3 md:gap-4 -mt-0 mb-6">
         {slides.map((_, index) => (
