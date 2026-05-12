@@ -43,7 +43,7 @@ export default function Books() {
         Discover Your Next Masterpiece
       </h1>
       <p className="text-gray-500 text-base md:text-lg font-bold">
-       Browse through the curated collection from Dr. Osaren Emokpae
+       Browse through the curated collection from Prof. Osaren Emokpae
       </p>
     </div>
     

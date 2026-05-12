@@ -46,7 +46,7 @@ export default function Teaching() {
               Teaching & Resources
             </h1>
             <p className="text-gray-300 text-base md:text-lg">
-              Explore teachings and resources from Dr. Osaren Emokpae
+              Explore teachings and resources from Prof. Osaren Emokpae
             </p>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 top-[70%] md:left-auto md:right-0 md:top-1/2 md:-translate-y-[70%] md:translate-x-0 w-[200px] h-[120px] md:w-[340px] md:h-[200px] bg-gray-400/60 rounded-[50%]"></div>
