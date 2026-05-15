@@ -245,7 +245,7 @@ export default function Home() {
       </nav>
 
       {/* HERO CAROUSEL */}
-      <section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-10 overflow-hidden">
+      <section className="relative w-full min-h-[400px] md:min-h-[600px] px-4 md:px-12 mt-2 mb-8 overflow-hidden">
         <div
           className="hidden md:block absolute top-0 left-0 w-[600px] h-full bg-[#6B0F1A] z-0"
           style={{ clipPath: "polygon(0 0, 100% 0, 80% 70%, 0 100%)" }}
@@ -339,8 +339,36 @@ export default function Home() {
         ))}
       </div>
 
+      {/* Birthday occasion video section - Two columns */}
+
+      <section className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-18">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center bg-[#f6ecd9] rounded-2xl p-6 md:p-4 shadow-lg ">
+          {/* Left side - YouTube video (plays on page) */}
+          <div className="w-full">
+            <div className="h-96 md:h-[400px] rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.youtube.com/embed/lAdRXIGoAQc"
+                title="Birthday occasion video of Dr. Osaren Emokpae"
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+
+          {/* Right side - Text content */}
+          <div className="text-left">
+            <p className="text-gray-800 leading-relaxed mb-2 text-xl font-bold">
+              Dr Reuben Abati celebrating Professor Osaren Emokpae  on the occasion of his birthday.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       {/* BIOGRAPHY CARD */}
-      <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-20">
+      <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-14">
         <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-6 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
           <img
             src="/second-Img.png"
