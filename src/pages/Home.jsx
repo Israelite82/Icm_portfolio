@@ -368,12 +368,12 @@ export default function Home() {
 
 
       {/* BIOGRAPHY CARD */}
-      <section className="w-full max-w-[1280px] mx-auto px-4 md:px-6 mt-12 md:mt-14">
+      <section className="w-full max-w-[1270px] mx-auto px-4 md:px-6 mt-12 md:mt-14">
         <div className="bg-[#f6ecd9] text-gray-800 rounded-2xl p-6 md:p-6 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 shadow-lg">
           <img
             src="/second-Img.png"
             alt="Biography"
-            className="w-full h-65 md:h-[24rem] object-cover rounded-xl"
+            className="w-full h-80 md:h-[30rem] object-cover rounded-xl"
           />
           <p className="text-sm md:text-base leading-relaxed md:mt-14">
             Dr. Osaren Philips Emokpae is an Erudite Scholar, Global Apostle,
@@ -392,7 +392,7 @@ export default function Home() {
       <section className="relative w-full mt-20 md:mt-32 px-4">
         <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[90%] md:max-w-[74rem] rounded-md -top-10 h-[360px] bg-[#16233B] z-0"></div>
         <div className="relative max-w-6xl mx-auto px-2 md:px-2 z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-8 justify-items-center">
             {[
               "homebook1.png",
               "homebook2.png",
